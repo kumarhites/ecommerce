@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 
 const Cart = () => {
-  const { setIsLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const handleLogout = () => {
     localStorage.removeItem("token");
-    setIsLoggedIn(localStorage.getItem("token") ? true : false);
+    setIsLoggedIn(!isLoggedIn);
   };
   return (
     <div>
