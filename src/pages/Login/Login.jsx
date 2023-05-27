@@ -1,8 +1,7 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
-import { useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import "./Login.css";
-
 
 function Login() {
   const navigate = useNavigate();
@@ -15,7 +14,7 @@ function Login() {
   });
 
   const handleInput = (e) => {
-    setError("")
+    setError("");
     setUserLoginDetails({
       ...userLoginDetails,
       [e.target.name]: e.target.value,
@@ -64,12 +63,11 @@ function Login() {
   };
 
   return (
-    
     <>
       <div className="flex flex-col justify-center px-14 py-20 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h1 className="mt-10 text-center text-4xl font-[500] leading-9 tracking-tight text-gray-900 font-primary">
-            KYKS.
+            KICKS.
           </h1>
           <h2 className="mt-10 text-center text-xl font-bold tracking-tight text-gray-900">
             Sign in to awesomeness 😉
@@ -83,7 +81,7 @@ function Login() {
                 htmlFor="email"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Email address
+                Email address <span>*</span>
               </label>
               <div className="mt-2">
                 <input
@@ -106,12 +104,10 @@ function Login() {
                   htmlFor="password"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Password
+                  Password <span>*</span>
                 </label>
                 <div className="text-sm">
-                  <a className="links">
-                    Forgot password?
-                  </a>
+                  <a className="links">Forgot password?</a>
                 </div>
               </div>
               <div className="mt-2">
@@ -152,9 +148,9 @@ function Login() {
 
           <p className="mt-10 text-center text-sm text-gray-500">
             Not a member?{" "}
-            <a className="links">
+            <NavLink to="/signup" className="links">
               Signup
-            </a>
+            </NavLink>
           </p>
         </div>
       </div>

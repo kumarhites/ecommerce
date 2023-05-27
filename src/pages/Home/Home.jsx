@@ -6,6 +6,11 @@ const Home = () => {
 
   const { isLoggedIn, name, setIsLoggedIn } = useContext(AuthContext);
   const handleLoginBtnClick = () => {
+    if(localStorage.getItem("newUser")){
+      localStorage.removeItem("token")
+      localStorage.removeItem("newUser")
+      localStorage.removeItem("newUserFlag")
+    }
     setIsLoggedIn(!isLoggedIn);
   };
   const handleLogoutBtnClick = () => {};

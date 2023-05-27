@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { loginService } from "../services/LoginService/LoginService";
+import { signupService } from "../services/SignupService/SignupService";
 
 export const AuthContext = createContext();
 
@@ -54,6 +55,40 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const signupHandler = async (
+    { firstname, lastname, email, password },
+    callback
+  ) => {
+    try {
+      const response = await signupService(
+        firstname,
+        lastname,
+        email,
+        password
+      );
+      const {
+        status,
+        data: { createdUser, encodedToken },
+      } = response;
+      if (status === 201) {
+        localStorage.setItem(
+          "newUser",
+          JSON.stringify({ createdUser, encodedToken })
+        );
+        localStorage.setItem("token", encodedToken);
+        localStorage.setItem("newUserFlag", 1)
+        setIsLoggedIn(localStorage.getItem("token") ? true : false);
+        //Invoke callback after successful signup
+        if (typeof callback === "function") {
+          callback();
+        }
+      }
+    } catch (error) {
+      const errorType = "Auth";
+      console.error(errorType, error);
+      console.log(error.response.data.errors[0]);
+    }
+  };
 
   return (
     <AuthContext.Provider
@@ -67,6 +102,7 @@ export const AuthProvider = ({ children }) => {
         setError,
         validatePassword,
         validateEmail,
+        signupHandler,
       }}
     >
       {children}

@@ -7,6 +7,7 @@ import Cart from "./pages/Cart/Cart";
 import Wishlist from "./pages/Wishlist/Wishlist";
 import Login from "./pages/Login/Login";
 import { PrivateRoute } from "./utils/ProtectedRoutes";
+import Signup from "./pages/Signup/Signup";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/wishlist" element={<Wishlist />} />
         </Route>
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </div>
   );
