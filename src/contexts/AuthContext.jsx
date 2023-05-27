@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { loginService } from "../services/LoginService/LoginService";
 
 export const AuthContext = createContext();
@@ -47,12 +47,13 @@ export const AuthProvider = ({ children }) => {
       if (
         error.response.data.errors[0].includes("Unauthorized access error.")
       ) {
-        setError("Invalid email or password");
+        setError("Invalid password");
       } else if (error.response.data.errors[0].includes("Not Found")) {
         setError("User not registered");
       }
     }
   };
+
 
   return (
     <AuthContext.Provider
