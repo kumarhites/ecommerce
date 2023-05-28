@@ -14,7 +14,7 @@ function App() {
     <div className="App">
       <Navigation />
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route element={<PrivateRoute />}>
           <Route path="/test" element={<Test />} />
           <Route path="/cart" element={<Cart />} />
