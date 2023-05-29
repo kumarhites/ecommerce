@@ -8,11 +8,14 @@ import Wishlist from "./pages/Wishlist/Wishlist";
 import Login from "./pages/Login/Login";
 import { PrivateRoute } from "./utils/ProtectedRoutes";
 import Signup from "./pages/Signup/Signup";
+import Footer from "./Components/Footer";
+import Body from "./Components/Body";
 
 function App() {
   return (
     <div className="App">
       <Navigation />
+      <Body />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route element={<PrivateRoute />}>
@@ -23,6 +26,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

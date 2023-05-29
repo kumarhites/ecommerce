@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import Wrapper from "./Wrapper";
 import Menu from "./Menu";
-import { IoBag, IoMenu } from "react-icons/io5";
-import { IoMdHeart, IoMdClose } from "react-icons/io";
-import { RiSearchLine } from "react-icons/ri";
+import { IoBagOutline, IoMenu } from "react-icons/io5";
+import { IoMdClose } from "react-icons/io";
+import { RiSearchLine, RiHeart3Line } from "react-icons/ri";
 import { CgSmileMouthOpen } from "react-icons/cg";
 
 import NavCSS from "../assets/styles/Navigation.module.css";
@@ -14,6 +14,28 @@ const Navigation = () => {
   const [show, setShow] = useState("translate-y-0");
   const [mobileMenu, setMobileMenu] = useState(false);
   const [showCategory, setShowCategory] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  const controlNavbar = () => {
+    if (window.scrollY > 300) {
+      if (window.scrollY > lastScrollY && !mobileMenu) {
+        setShow("-translate-y-[80px]");
+      } else {
+        setShow("shadow-sm");
+      }
+    } else {
+      setShow("translate-y-0");
+    }
+    setLastScrollY(window.scrollY);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", controlNavbar);
+    return () => {
+      window.removeEventListener("scroll", controlNavbar);
+    };
+  }, [lastScrollY]);
+
   return (
     <>
       {/* <NavLink to="/home" >Home</NavLink> || 
@@ -22,31 +44,33 @@ const Navigation = () => {
       <NavLink to="/test" >Test</NavLink> || 
       <NavLink to="/login" >Login</NavLink> */}
       <header
-        className={`w-full h-[70px] md:h-[80px] bg-white flex items-center justify-between z-20 sticky top-0 transition-transform duration-300 ${show} shadow`}
+        className={`w-full h-[50px] md:h-[60px] bg-white flex items-center justify-between z-20 sticky top-0 transition-transform duration-300 ${show} shadow`}
       >
         <Wrapper className="h-[60px] flex justify-between items-center">
           <NavLink to="/" className="font-primary text-2xl ">
             KICKS.
           </NavLink>
           <Menu showCategory={showCategory} setShowCategory={setShowCategory} />
-          {mobileMenu && <MenuMobile
-            showCategory={showCategory}
-            setShowCategory={setShowCategory}
-            setMobileMenu={setMobileMenu}
-          />}
+          {mobileMenu && (
+            <MenuMobile
+              showCategory={showCategory}
+              setShowCategory={setShowCategory}
+              setMobileMenu={setMobileMenu}
+            />
+          )}
           {/* icons menu start */}
           <div className="flex items-center gap-5 text-black">
             <div className="hover:bg-black/[0.07] p-2 rounded-full">
               <NavLink to="/search">{<RiSearchLine size={24} />}</NavLink>
             </div>
             <div className="relative inline-block  hover:bg-black/[0.07] p-2 rounded-full">
-              <NavLink to="/wishlist">{<IoMdHeart size={24} />}</NavLink>
+              <NavLink to="/wishlist">{<RiHeart3Line size={24} />}</NavLink>
               <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/4 -translate-y-1/6 bg-red-500 rounded-full">
                 9
               </span>
             </div>
             <div className="relative inline-block hover:bg-black/[0.07] p-2 rounded-full">
-              <NavLink to="/cart">{<IoBag size={24} />}</NavLink>
+              <NavLink to="/cart">{<IoBagOutline size={24} />}</NavLink>
               <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/4 -translate-y-1/6 bg-red-500 rounded-full">
                 5
               </span>

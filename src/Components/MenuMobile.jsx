@@ -4,21 +4,22 @@ import { NavLink } from "react-router-dom";
 
 const data = [
   { id: 1, name: "All", url: "/" },
-  { id: 1, name: "Men", url: "/men" },
-  { id: 1, name: "Women", url: "/women" },
-  { id: 1, name: "Brands", subMenu: true },
+  { id: 2, name: "Men", url: "/men" },
+  { id: 3, name: "Women", url: "/women" },
+  { id: 4, name: "Brands", subMenu: true },
 ];
 
 const subMenuData = [
   { id: 1, name: "Nike" },
-  { id: 1, name: "Vans" },
-  { id: 1, name: "Adidas" },
-  { id: 1, name: "Reebok" },
+  { id: 2, name: "Vans" },
+  { id: 3, name: "Adidas" },
+  { id: 4, name: "Reebok" },
+  { id: 5, name: "Converse" },
 ];
 
 const MenuMobile = ({ showCategory, setShowCategory, setMobileMenu }) => {
   return (
-    <ul className="flex flex-col md:hidden font-semibold absolute top-[70px] left-0 w-full h-[calc(100vh-70px)] bg-white border-t text-gray-900">
+    <ul className="flex flex-col md:hidden font-semibold absolute top-[50px] left-0 w-full h-[calc(100vh-70px)] bg-white border-t text-gray-900">
       {data.map((item) => {
         return (
           <React.Fragment key={item.id}>

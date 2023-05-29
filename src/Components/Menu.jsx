@@ -4,16 +4,17 @@ import { NavLink } from "react-router-dom";
 
 const data = [
   { id: 1, name: "All", url: "/" },
-  { id: 1, name: "Men", url: "/men" },
-  { id: 1, name: "Women", url: "/women" },
-  { id: 1, name: "Brands", subMenu: true },
+  { id: 2, name: "Men", url: "/men" },
+  { id: 3, name: "Women", url: "/women" },
+  { id: 4, name: "Brands", subMenu: true },
 ];
 
 const subMenuData = [
   { id: 1, name: "Nike" },
-  { id: 1, name: "Vans" },
-  { id: 1, name: "Adidas" },
-  { id: 1, name: "Reebok" },
+  { id: 2, name: "Vans" },
+  { id: 3, name: "Adidas" },
+  { id: 4, name: "Reebok" },
+  { id: 5, name: "Converse" },
 ];
 
 const Menu = ({ showCategory, setShowCategory }) => {
@@ -24,14 +25,14 @@ const Menu = ({ showCategory, setShowCategory }) => {
           <React.Fragment key={item.id}>
             {item?.subMenu ? (
               <li
-                className="cursor-pointer flex items-center gap-2 relative"
+                className="cursor-pointer flex items-center gap-2 relative "
                 onMouseEnter={() => setShowCategory(true)}
                 onMouseLeave={() => setShowCategory(false)}
               >
                 {item.name}
                 <HiChevronDown size={20} />
                 {showCategory && (
-                  <ul className="bg-white absolute top-6 left-0 min-w-[200px] px-1 text-black shadow-lg py-1 rounded-lg">
+                  <ul className="bg-white absolute top-6 left-0 min-w-full px-1 text-black shadow-lg py-1 rounded-lg">
                     {subMenuData.map((subMenu) => (
                       <NavLink
                         to="/"
@@ -40,9 +41,6 @@ const Menu = ({ showCategory, setShowCategory }) => {
                         onClick={() => setShowCategory(false)}
                       >
                         {subMenu.name}
-                        <span className="opacity-50 text-sm">
-                          {subMenu.doc_count}
-                        </span>
                       </NavLink>
                     ))}
                   </ul>
@@ -50,7 +48,14 @@ const Menu = ({ showCategory, setShowCategory }) => {
               </li>
             ) : (
               <li className="cursor-pointer">
-                <NavLink to={item?.url}>{item.name}</NavLink>
+                <NavLink
+                  to={item?.url}
+                  className={({ isActive }) =>
+                    isActive ? "border-b-2 pb-5 border-black" : ""
+                  }
+                >
+                  {item.name}
+                </NavLink>
               </li>
             )}
           </React.Fragment>
