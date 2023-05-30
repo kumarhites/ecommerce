@@ -7,7 +7,7 @@ import { IoMdClose } from "react-icons/io";
 import { RiSearchLine, RiHeart3Line } from "react-icons/ri";
 import { CgSmileMouthOpen } from "react-icons/cg";
 
-import NavCSS from "../assets/styles/Navigation.module.css";
+// import NavCSS from "../assets/styles/Navigation.module.css";
 import MenuMobile from "./MenuMobile";
 
 const Navigation = () => {
@@ -44,7 +44,7 @@ const Navigation = () => {
       <NavLink to="/test" >Test</NavLink> || 
       <NavLink to="/login" >Login</NavLink> */}
       <header
-        className={`w-full h-[50px] md:h-[60px] bg-white flex items-center justify-between z-20 sticky top-0 transition-transform duration-300 ${show} shadow`}
+        className={`w-full h-[50px] md:h-[60px] bg-white flex items-center justify-between z-20 sticky top-0 transition-transform duration-300 ${show}`}
       >
         <Wrapper className="h-[60px] flex justify-between items-center">
           <NavLink to="/" className="font-primary text-2xl ">

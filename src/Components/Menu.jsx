@@ -3,7 +3,7 @@ import { HiChevronDown } from "react-icons/hi";
 import { NavLink } from "react-router-dom";
 
 const data = [
-  { id: 1, name: "All", url: "/" },
+  { id: 1, name: "All", url: "/products" },
   { id: 2, name: "Men", url: "/men" },
   { id: 3, name: "Women", url: "/women" },
   { id: 4, name: "Brands", subMenu: true },

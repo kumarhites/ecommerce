@@ -9,13 +9,13 @@ import Login from "./pages/Login/Login";
 import { PrivateRoute } from "./utils/ProtectedRoutes";
 import Signup from "./pages/Signup/Signup";
 import Footer from "./Components/Footer";
-import Body from "./Components/Body";
+import { Products } from "./pages/Products/Products";
+
 
 function App() {
   return (
     <div className="App">
       <Navigation />
-      <Body />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route element={<PrivateRoute />}>
@@ -25,8 +25,8 @@ function App() {
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/products" element={<Products />} />
       </Routes>
-      <Footer />
     </div>
   );
 }
