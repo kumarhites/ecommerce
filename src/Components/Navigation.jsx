@@ -44,7 +44,7 @@ const Navigation = () => {
       <NavLink to="/test" >Test</NavLink> || 
       <NavLink to="/login" >Login</NavLink> */}
       <header
-        className={`w-full h-[50px] md:h-[60px] bg-white flex items-center justify-between z-20 sticky top-0 transition-transform duration-300 ${show}`}
+        className={`w-full h-[50px] md:h-[60px] bg-white flex items-center justify-between z-20 fixed top-0 transition-transform duration-300 ${show}`}
       >
         <Wrapper className="h-[60px] flex justify-between items-center">
           <NavLink to="/" className="font-primary text-2xl ">
@@ -59,13 +59,13 @@ const Navigation = () => {
             />
           )}
           {/* icons menu start */}
-          <div className="flex items-center gap-5 text-black">
+          <div className="flex items-center gap-0 md:gap-5 text-black">
             <div className="hover:bg-black/[0.07] p-2 rounded-full">
               <NavLink to="/search">{<RiSearchLine size={24} />}</NavLink>
             </div>
             <div className="relative inline-block  hover:bg-black/[0.07] p-2 rounded-full">
               <NavLink to="/wishlist">{<RiHeart3Line size={24} />}</NavLink>
-              <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/4 -translate-y-1/6 bg-red-500 rounded-full">
+              <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/4 -translate-y-1/6 bg-red-500 rounded-full">
                 9
               </span>
             </div>
