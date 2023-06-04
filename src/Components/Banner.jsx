@@ -13,7 +13,7 @@ function Banner() {
           </span>
         </h1>
         <NavLink
-          to="/test"
+          to="/products"
           className="rounded-md max-w-max bg-blue-600 px-5 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 hover:text-white hover:shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           Shop Now

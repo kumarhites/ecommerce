@@ -10,7 +10,7 @@ import Signup from "./pages/Signup/Signup";
 import Footer from "./Components/Footer";
 import Products from "./pages/Products/Products";
 import ProductDetails from "./pages/ProductDetails/ProductDetails";
-import Test from "./pages/Test/Test";
+
 
 function App() {
   return (
@@ -27,7 +27,6 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/products" element={<Products />} />
         <Route path="/productdetails" element={<ProductDetails />} />
-        <Route path="/test" element={<Test />} />
       </Routes>
     </div>
   );

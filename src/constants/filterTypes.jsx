@@ -1,0 +1,5 @@
+export const filterTypes = {
+    SET_PRODUCTS: "SET_PRODUCTS",
+    SET_CART_STATE: "SET_CART_STATE",
+    SET_WISHLIST_STATE: "SET_WISHLIST_STATE",
+}
