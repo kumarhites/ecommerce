@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Wrapper from "../../Components/Wrapper";
 import ProductCard from "../../Components/ProductCard";
-// import Footer from "../../Components/Footer";
-// import { NavLink } from "react-router-dom";
-import { AiFillStar } from "react-icons/ai";
+import { ProductsContext } from "../../contexts/ProductsContext";
 import Sidebar from "../../Components/Sidebar";
 
 const Products = () => {
+  const { products } = useContext(ProductsContext);
   const categories = [
     { id: 1, category: "Lifestyle" },
     { id: 2, category: "Running" },
@@ -20,10 +19,10 @@ const Products = () => {
     { id: 4, brandName: "Reebok" },
     { id: 5, brandName: "Converse" },
   ];
-  const [rangeValue, setRangeValue] = useState(1);
-  const handleRangeInput = (e) => {
-    setRangeValue(e.target.value);
-  };
+  // const [rangeValue, setRangeValue] = useState(1);
+  // const handleRangeInput = (e) => {
+  //   setRangeValue(e.target.value);
+  // };
 
   return (
     <>
@@ -44,23 +43,14 @@ const Products = () => {
           {/* heading ends */}
           {/* sidebar starts */}
           <div className="flex flex-col lg:flex-row gap-12 py-8">
-            <Sidebar />
+            <Sidebar categories={categories} brands={brands} />
             {/* sidebar items end */}
             {/* summary starts */}
             <div className="flex-[2]">
               <div className="grid md:grid-cols-3 gap-4">
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
+                {products.map(({_id, title, price, brand, trending, rating, images:[{src}]}) => (
+                  <ProductCard id={_id} title={title} price={price} trending={trending} brand={brand} image={src} rating={rating}/>
+                ))}
               </div>
             </div>
             {/* summary ends */}

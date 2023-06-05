@@ -1,4 +1,4 @@
-import { v4 as uuid } from "uuid";
+// import { v4 as uuid } from "uuid";
 
 /**
  * Product Database can be added here.
@@ -6,87 +6,97 @@ import { v4 as uuid } from "uuid";
  * */
 
 export const products = [
+  // {
+  //   _id: "62f89fcdd3f0aa3df7ca94e1",
+  //   id: 1,
+  //   title: "Nike Blazer Low '77 Vintage",
+  //   brand: "Nike",
+  //   price: "7,495.00",
+  //   categoryName: "Men's Shoes",
+  //   rating: "4.0",
+  //   images: [
+  //     {
+  //       id: 1,
+  //       src: "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/7d72aef6-1cf1-4a60-b9c5-c97138ab5b6a/blazer-low-77-vintage-shoes-HmmkdX.png",
+  //     },
+  //     {
+  //       id: 2,
+  //       src: "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/7d72aef6-1cf1-4a60-b9c5-c97138ab5b6a/blazer-low-77-vintage-shoes-HmmkdX.png",
+  //     },
+  //     {
+  //       id: 3,
+  //       src: "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/2de986e4-74d4-4b3b-a478-2c62820fd388/blazer-low-77-vintage-shoes-HmmkdX.png",
+  //     },
+  //     {
+  //       id: 4,
+  //       src: "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/82649e36-5718-443b-a85d-d8e400f6e3d0/blazer-low-77-vintage-shoes-HmmkdX.png",
+  //     },
+  //   ],
+  // },
+  // {
+  //   _id: "62f89fcdd3f0aa3df7ca94e5",
+  //   id: 2,
+  //   title: "Air Jordan 1 Mid SE",
+  //   brand: "Nike",
+  //   price: "11,895.00",
+  //   categoryName: "Women's Shoes",
+  //   rating: "4.7",
+  //   images: [
+  //     {
+  //       id: 1,
+  //       src: "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/39a93424-d940-4b24-b35f-189872f36c3e/air-jordan-1-mid-se-shoes-lCj12k.png",
+  //     },
+  //     {
+  //       id: 2,
+  //       src: "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/39a93424-d940-4b24-b35f-189872f36c3e/air-jordan-1-mid-se-shoes-lCj12k.png",
+  //     },
+  //     {
+  //       id: 3,
+  //       src: "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/84d63481-ceb5-4c4e-a2dc-1f69a9d8fcc5/air-jordan-1-mid-se-shoes-lCj12k.png",
+  //     },
+  //     {
+  //       id: 4,
+  //       src: "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/03a3e725-dff5-4697-be78-7940d2d89bb8/air-jordan-1-mid-se-shoes-lCj12k.png",
+  //     },
+  //   ],
+  // },
   {
-    _id: uuid(),
-    title: "Nike Blazer Low '77 Vintage",
-    brand: "Nike",
-    price: "7 495.00",
-    categoryName: "Men's Shoes",
-    images: [
-      {
-        id: 1,
-        src: "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/f031c6e2-5941-4bb7-a29d-31683f5d4da2/blazer-low-77-vintage-shoes-HmmkdX.png",
-      },
-      {
-        id: 2,
-        src: "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/7d72aef6-1cf1-4a60-b9c5-c97138ab5b6a/blazer-low-77-vintage-shoes-HmmkdX.png",
-      },
-      {
-        id: 3,
-        src: "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/2de986e4-74d4-4b3b-a478-2c62820fd388/blazer-low-77-vintage-shoes-HmmkdX.png",
-      },
-      {
-        id: 4,
-        src: "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/82649e36-5718-443b-a85d-d8e400f6e3d0/blazer-low-77-vintage-shoes-HmmkdX.png",
-      },
-    ],
-  },
-  {
-    _id: uuid(),
-    title: "Air Jordan 1 Mid SE",
-    brand: "Nike",
-    price: "11 895.00",
-    categoryName: "Women's Shoes",
-    images: [
-      {
-        id: 1,
-        src: "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/cb1030a9-2a47-437e-8970-e1530bccebfc/air-jordan-1-mid-se-shoes-lCj12k.png",
-      },
-      {
-        id: 2,
-        src: "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/39a93424-d940-4b24-b35f-189872f36c3e/air-jordan-1-mid-se-shoes-lCj12k.png",
-      },
-      {
-        id: 3,
-        src: "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/84d63481-ceb5-4c4e-a2dc-1f69a9d8fcc5/air-jordan-1-mid-se-shoes-lCj12k.png",
-      },
-      {
-        id: 4,
-        src: "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/03a3e725-dff5-4697-be78-7940d2d89bb8/air-jordan-1-mid-se-shoes-lCj12k.png",
-      },
-    ],
-  },
-  {
-    _id: uuid(),
+    _id: "62f89fcdd3f0aa3df7ca94e9",
+    id: 1,
     title: "Zig Dynamica 4 Shoes",
     brand: "Reebok",
-    price: "7 416.32",
+    price: "7,416.32",
     categoryName: "Men's Shoes",
+    trending: true,
+    rating: "5.0",
     images: [
       {
         id: 1,
-        src: "https://reebok.bynder.com/transform/b12f3fca-3447-4b5d-af91-7d2e09455f45/100069705_SLC_eCom-tif?io=transform:fit,width:1000&quality=100",
+        src: "https://reebok.bynder.com/transform/68b963c2-bea0-4b22-bf8e-3bb6d7db644d/100026023_SLC_eCom-tif?io=transform:fit,width:1000&quality=100",
       },
       {
         id: 2,
-        src: "https://reebok.bynder.com/transform/60e8c1d1-dff0-4494-ad78-3c1e1f78582c/100069705_FLT_eCom-tif?io=transform:fit,width:1000&quality=100",
+        src: "https://reebok.bynder.com/transform/6d0ed7b0-b5e1-40ed-acd5-2c8361ba023d/100026023_FLT_eCom-tif?io=transform:fit,width:1000&quality=100",
       },
       {
         id: 3,
-        src: "https://reebok.bynder.com/transform/40e1743c-4d6c-4db3-9d0f-fab72d108547/100069705_BLT_eCom-tif?io=transform:fit,width:1000&quality=100",
+        src: "https://reebok.bynder.com/transform/4fca59e9-dde4-48c1-82cb-1481cc9cf374/100026023_D1_eCom-tif?io=transform:fit,width:1000&quality=100",
       },
       {
         id: 4,
-        src: "https://reebok.bynder.com/transform/40e1743c-4d6c-4db3-9d0f-fab72d108547/100069705_BLT_eCom-tif?io=transform:fit,width:1000&quality=100",
+        src: "https://reebok.bynder.com/transform/2a033a79-03d8-43ca-87e5-f8681d952b45/100026023_BLT_eCom-tif?io=transform:fit,width:1000&quality=100",
       },
     ],
   },
   {
-    _id: uuid(),
+    _id: "62f89fcdd3f0aa3df7ca94ed",
+    id: 2,
     title: "STREETBALL III SHOES",
     brand: "Adidas",
-    price: "9 799.50",
+    price: "9,799.50",
     categoryName: "Men's Shoes",
+    trending: true,
+    rating: "4.8",
     images: [
       {
         id: 1,
@@ -107,15 +117,18 @@ export const products = [
     ],
   },
   {
-    _id: uuid(),
+    _id: "62f89fcdd3f0aa3df7ca94ec",
+    id: 3,
     title: "RS-X Efekt Turbo Unisex Sneakers",
     brand: "Puma",
-    price: "7 199.20",
+    price: "7,199.20",
     categoryName: "Men's Shoes",
+    trending: false,
+    rating: "4.7",
     images: [
       {
         id: 1,
-        src: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/390048/01/sv01/fnd/IND/fmt/png/RS-X-Efekt-Turbo-Unisex-Sneakers",
+        src: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/390048/01/sv03/fnd/IND/fmt/png/RS-X-Efekt-Turbo-Unisex-Sneakers",
       },
       {
         id: 2,
@@ -128,6 +141,34 @@ export const products = [
       {
         id: 4,
         src: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/390048/01/dt02/fnd/IND/fmt/png/RS-X-Efekt-Turbo-Unisex-Sneakers",
+      },
+    ],
+  },
+  {
+    _id: "62f89fcdd3f0fg3df7ca94ec",
+    id: 4,
+    title: "RS-X Efekt Turbo Unisex Sneakers",
+    brand: "Puma",
+    price: "7,199.20",
+    categoryName: "Men's Shoes",
+    trending: true,
+    rating: "4.7",
+    images: [
+      {
+        id: 1,
+        src: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:f5f5f5,w_750,h_750/global/389389/02/sv03/fnd/IND/fmt/png/Carina-2.0-Laser-Cut-Women's-Sneakers",
+      },
+      {
+        id: 2,
+        src: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:f5f5f5,w_750,h_750/global/389389/02/fnd/IND/fmt/png/Carina-2.0-Laser-Cut-Women's-Sneakers",
+      },
+      {
+        id: 3,
+        src: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:f5f5f5,w_750,h_750/global/389389/02/sv04/fnd/IND/fmt/png/Carina-2.0-Laser-Cut-Women's-Sneakers",
+      },
+      {
+        id: 4,
+        src: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:f5f5f5,w_750,h_750/global/389389/02/bv/fnd/IND/fmt/png/Carina-2.0-Laser-Cut-Women's-Sneakers",
       },
     ],
   },

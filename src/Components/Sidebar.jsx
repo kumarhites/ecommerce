@@ -1,6 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
+import {AiFillStar} from "react-icons/ai"
 
-const Sidebar = () => {
+const Sidebar = ({categories, brands}) => {
+
+  const [rangeValue, setRangeValue] = useState(1);
+  const handleRangeInput = (e) => {
+    setRangeValue(e.target.value);
+  };
+
   return (
     <>
       <div className="flex-[0.5] ">

@@ -1,64 +1,51 @@
+import axios from "axios";
 import { createContext, useEffect, useReducer, useState } from "react";
-import { productService } from "../services/ProductsService/ProductsService";
-import { filterTypes } from "../constants/filterTypes";
-// import { categoriesService } from "../services/CategoriesService/CategoriesService"
 
+import { productReducer } from "../reducers/productReducer";
 
 export const ProductsContext = createContext();
 
+const initialState = {
+  isLoading: false,
+  isError: false,
+  products: [],
+  trending: [],
+};
+
 export const ProductsProvider = ({ children }) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState(null);
-  const { SET_PRODUCTS } = filterTypes;
+  const [state, dispatch] = useReducer(productReducer, initialState);
 
-  const productsReducer = (state, action) => {
-    switch (action.type) {
-      case SET_PRODUCTS:
-        return { ...state, products: action.payload };
-    }
-  };
-  const [state, dispatch] = useReducer(productsReducer, {
-    products: [],
-  });
-
-  const getProducts = async () => {
-    setIsLoading(true);
+  // get all products
+  const getproducts = async () => {
+    dispatch({ type: "SET_LOADING" });
     try {
-      const response = await productService();
-      const {status, data: { products },} = response;
-      if (status === 200) {
-        dispatch({type: SET_PRODUCTS, payload: products})
-        setIsLoading(false);
+      const response = await axios.get("/api/products");
+      if (response.status === 200) {
+        const products = response.data.products;
+        dispatch({ type: "SET_PRODUCT", payload: products });
       }
     } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
+      dispatch({ type: "API_ERROR" });
     }
   };
 
-  // const getCategories = async() => {
+  // get single product
+  // const getSingleProduct = async (id) => {
   //   try {
-  //     const response = await categoriesService();
-  //     const {status, data:{categories}} = response;
-  //     console.log("from product context", categories);
+  //     const singleProduct = await axios.get(`/api/products/${id}`);
+  //     dispatch({ type: "SET_SINGLE_PRODUCT", payload: singleProduct });
   //   } catch (error) {
   //     console.log(error);
   //   }
-  // }
-
+  // };
   useEffect(() => {
-    getProducts();
-    // getCategories();
+    getproducts();
   }, []);
 
   return (
-    <ProductsContext.Provider
-      value={{
-        products: state.products,
-        getProducts,
-      }}
-    >
+    <ProductsContext.Provider value={{
+      ...state,
+     }}>
       {children}
     </ProductsContext.Provider>
   );
