@@ -12,7 +12,7 @@ export const products = [
   //   title: "Nike Blazer Low '77 Vintage",
   //   brand: "Nike",
   //   price: "7,495.00",
-  //   categoryName: "Men's Shoes",
+  //   gender: "Men",
   //   rating: "4.0",
   //   images: [
   //     {
@@ -39,7 +39,7 @@ export const products = [
   //   title: "Air Jordan 1 Mid SE",
   //   brand: "Nike",
   //   price: "11,895.00",
-  //   categoryName: "Women's Shoes",
+  //   gender: "Women's Shoes",
   //   rating: "4.7",
   //   images: [
   //     {
@@ -65,10 +65,12 @@ export const products = [
     id: 1,
     title: "Zig Dynamica 4 Shoes",
     brand: "Reebok",
-    price: "7,416.32",
-    categoryName: "Men's Shoes",
+    price: 7416.32,
+    gender: "Men",
+    category: ["Lifestyle", "Running"],
     trending: true,
     rating: "5.0",
+    size: 8,
     images: [
       {
         id: 1,
@@ -93,10 +95,12 @@ export const products = [
     id: 2,
     title: "STREETBALL III SHOES",
     brand: "Adidas",
-    price: "9,799.50",
-    categoryName: "Men's Shoes",
+    price: 9799.5,
+    gender: "Men",
+    category: ["Gym and Training", "Running"],
     trending: true,
     rating: "4.8",
+    size: 9,
     images: [
       {
         id: 1,
@@ -121,10 +125,12 @@ export const products = [
     id: 3,
     title: "RS-X Efekt Turbo Unisex Sneakers",
     brand: "Puma",
-    price: "7,199.20",
-    categoryName: "Men's Shoes",
+    price: 7204.2,
+    gender: "Women",
+    category: ["Lifestyle", "Running"],
     trending: false,
     rating: "4.7",
+    size: 10,
     images: [
       {
         id: 1,
@@ -149,10 +155,12 @@ export const products = [
     id: 4,
     title: "RS-X Efekt Turbo Unisex Sneakers",
     brand: "Puma",
-    price: "7,199.20",
-    categoryName: "Men's Shoes",
+    price: 5199.2,
+    gender: "Women",
+    category: ["Football", "Running"],
     trending: true,
     rating: "4.7",
+    size: 6,
     images: [
       {
         id: 1,

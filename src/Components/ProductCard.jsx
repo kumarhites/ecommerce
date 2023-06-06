@@ -1,18 +1,38 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { IoMdHeartEmpty } from "react-icons/io";
 import { IoHeart } from "react-icons/io5";
 import { AiFillStar } from "react-icons/ai";
+import { CartContext } from "../contexts/CartContext";
+// import { AddToCartButton } from "./AddToCartButton";
 
-const ProductCard = ({ id, title, price, trending, rating, image }) => {
+const ProductCard = ({ data }) => {
+  const {
+    addToWishList,
+    isItemPresentinWishlistHandler,
+    removeItemFromWishlist,
+  } = useContext(CartContext);
+  const {
+    _id,
+    title,
+    brand,
+    price,
+    categoryName,
+    trending,
+    rating,
+    size,
+    images,
+    qty,
+  } = data;
   return (
     <div
       className="transform duration-200 hover:scale-105 cursor-pointer rounded-lg hover:shadow-sm"
-      key={id}
+      key={_id}
     >
-      <NavLink to={`/productDetails/${id}`}>
-        <img src={image} alt={title} className="rounded-lg" />
+      <NavLink to={`/productDetails/${_id}`}>
+        <img src={images?.[0]?.src} alt={title} className="rounded-lg" />
         <div className="p-4 text-black/[0.9]">
-          <h2 className="text-lg font-medium">{title}</h2>
+          <h2 className="text-lg font-medium text-left">{title}</h2>
           <div className="flex items-center text-black/[0.5]">
             <p className="mr-2 text-lg font-semibold text-black">₹ {price}</p>
           </div>
@@ -33,9 +53,15 @@ const ProductCard = ({ id, title, price, trending, rating, image }) => {
             </div>
           )}
           <div>
-            <button>
-              <IoHeart size={24} color={"red"} />
-            </button>
+            {!isItemPresentinWishlistHandler(data) ? (
+              <button onClick={() => addToWishList(data)}>
+                <IoMdHeartEmpty size={24} color={"red"} />
+              </button>
+            ) : (
+              <button onClick={() => removeItemFromWishlist(data)}>
+                <IoHeart size={24} color={"red"} />
+              </button>
+            )}
           </div>
         </div>
       </div>

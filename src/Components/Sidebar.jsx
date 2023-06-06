@@ -1,7 +1,11 @@
-import React, {useState} from "react";
-import {AiFillStar} from "react-icons/ai"
+import React, { useContext, useState } from "react";
+import { AiFillStar } from "react-icons/ai";
+import { FilterContext } from "../contexts/FilterContext";
+import { ProductsContext } from "../contexts/ProductsContext";
 
-const Sidebar = ({categories, brands}) => {
+const Sidebar = ({ categories, brands }) => {
+  const { sortInput, dispatch, categoryInput, genderInput } =
+    useContext(FilterContext);
 
   const [rangeValue, setRangeValue] = useState(1);
   const handleRangeInput = (e) => {
@@ -31,11 +35,19 @@ const Sidebar = ({categories, brands}) => {
                       id={category}
                       name={category}
                       type="checkbox"
+                      readOnly
                       value={category}
+                      checked={categoryInput.includes(category)}
                       className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-full hover:bg-black/[0.05]"
+                      onClick={() =>
+                        dispatch({
+                          type: "GET_CATEGORY_DETAILS",
+                          payload: category,
+                        })
+                      }
                     />
                     <label
-                      for={category}
+                      htmlFor={category}
                       className="ml-2 text-sm font-medium text-gray-900"
                     >
                       {category}
@@ -57,10 +69,17 @@ const Sidebar = ({categories, brands}) => {
                       name={brandName}
                       type="checkbox"
                       value={brandName}
+                      readOnly
+                      onClick={() =>
+                        dispatch({
+                          type: "GET_BRAND_DETAILS",
+                          payload: brandName,
+                        })
+                      }
                       className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-full hover:bg-black/[0.05]"
                     />
                     <label
-                      for={brandName}
+                      htmlFor={brandName}
                       className="ml-2 text-sm font-medium text-gray-900"
                     >
                       {brandName}
@@ -77,14 +96,20 @@ const Sidebar = ({categories, brands}) => {
               <div className="flex flex-col">
                 <div className="flex md:items-center">
                   <input
+                    // onClick={""}
                     id="men"
                     name="men"
                     type="checkbox"
                     value="men"
+                    readOnly
+                    checked={genderInput.includes("men")}
+                    onClick={() =>
+                      dispatch({ type: "GET_GENDER", payload: "men" })
+                    }
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-full hover:bg-black/[0.05]"
                   />
                   <label
-                    for="men"
+                    htmlFor="men"
                     className="ml-2 text-sm font-medium text-gray-900"
                   >
                     Men
@@ -92,14 +117,20 @@ const Sidebar = ({categories, brands}) => {
                 </div>
                 <div className="flex md:items-center mt-1">
                   <input
+                    // onClick={""}
                     id="women"
                     name="women"
                     type="checkbox"
                     value="women"
+                    readOnly
+                    checked={genderInput.includes("women")}
+                    onClick={() =>
+                      dispatch({ type: "GET_GENDER", payload: "women" })
+                    }
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-full hover:bg-black/[0.05]"
                   />
                   <label
-                    for="women"
+                    htmlFor="women"
                     className="ml-2 text-sm font-medium text-gray-900"
                   >
                     Women
@@ -120,6 +151,10 @@ const Sidebar = ({categories, brands}) => {
                     type="radio"
                     value="LTH"
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-full hover:bg-black/[0.05]"
+                    checked={sortInput?.includes("LTH")}
+                    onChange={() =>
+                      dispatch({ type: "SORT_FILTER", payload: "LTH" })
+                    }
                   />
                   <label
                     htmlFor="sortByPriceLTH"
@@ -135,6 +170,10 @@ const Sidebar = ({categories, brands}) => {
                     type="radio"
                     value="HTL"
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-full hover:bg-black/[0.05]"
+                    checked={sortInput?.includes("HTL")}
+                    onChange={() =>
+                      dispatch({ type: "SORT_FILTER", payload: "HTL" })
+                    }
                   />
                   <label
                     htmlFor="sortByPriceHTL"

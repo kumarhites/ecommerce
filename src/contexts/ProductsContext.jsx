@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext, useEffect, useReducer, useState } from "react";
+import { createContext, useEffect, useReducer } from "react";
 
 import { productReducer } from "../reducers/productReducer";
 

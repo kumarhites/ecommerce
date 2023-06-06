@@ -1,11 +1,15 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import Wrapper from "../../Components/Wrapper";
 import ProductCard from "../../Components/ProductCard";
-import { ProductsContext } from "../../contexts/ProductsContext";
 import Sidebar from "../../Components/Sidebar";
+import { FilterContext } from "../../contexts/FilterContext";
 
 const Products = () => {
-  const { products } = useContext(ProductsContext);
+  // const { products } = useContext(ProductsContext);
+  // console.log("products", products);
+  const { genderFilteredProducts, searchInput, dispatch } =
+    useContext(FilterContext);
+  // console.log("filterProducts from products page: ", filterProducts);
   const categories = [
     { id: 1, category: "Lifestyle" },
     { id: 2, category: "Running" },
@@ -33,8 +37,11 @@ const Products = () => {
             <div className="text-[28px] md:text-[34px] mb-5 font-semibold leading-tight top-[25px] relative">
               <input
                 type="search"
-                name=""
-                id=""
+                name="search"
+                value={searchInput}
+                onChange={(e) =>
+                  dispatch({ type: "SEARCH_FILTER", payload: e.target.value })
+                }
                 className="mb-5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-[0.5px] focus:ring-inset focus:ring-black sm:text-sm sm:leading-6 px-2"
                 placeholder="Search here..."
               />
@@ -48,8 +55,8 @@ const Products = () => {
             {/* summary starts */}
             <div className="flex-[2]">
               <div className="grid md:grid-cols-3 gap-4">
-                {products.map(({_id, title, price, brand, trending, rating, images:[{src}]}) => (
-                  <ProductCard id={_id} title={title} price={price} trending={trending} brand={brand} image={src} rating={rating}/>
+                {genderFilteredProducts?.map((filterProducts) => (
+                  <ProductCard data={filterProducts} key={filterProducts._id} />
                 ))}
               </div>
             </div>

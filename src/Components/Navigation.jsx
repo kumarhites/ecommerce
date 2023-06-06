@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import Wrapper from "./Wrapper";
 import Menu from "./Menu";
@@ -9,12 +9,16 @@ import { CgSmileMouthOpen } from "react-icons/cg";
 
 // import NavCSS from "../assets/styles/Navigation.module.css";
 import MenuMobile from "./MenuMobile";
+import { CartContext } from "../contexts/CartContext";
 
 const Navigation = () => {
   const [show, setShow] = useState("translate-y-0");
   const [mobileMenu, setMobileMenu] = useState(false);
   const [showCategory, setShowCategory] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const { cart, wishlist } = useContext(CartContext);
+  const cartLength = cart.length;
+  const wishlistLength = wishlist.length;
 
   const controlNavbar = () => {
     if (window.scrollY > 300) {
@@ -65,15 +69,23 @@ const Navigation = () => {
             </div>
             <div className="relative inline-block  hover:bg-black/[0.07] p-2 rounded-full">
               <NavLink to="/wishlist">{<RiHeart3Line size={24} />}</NavLink>
-              <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/4 -translate-y-1/6 bg-red-500 rounded-full">
-                9
-              </span>
+              {wishlist?.length <= 0 ? (
+                ""
+              ) : (
+                <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/4 -translate-y-1/6 bg-red-500 rounded-full">
+                  {wishlistLength}
+                </span>
+              )}
             </div>
             <div className="relative inline-block hover:bg-black/[0.07] p-2 rounded-full">
               <NavLink to="/cart">{<IoBagOutline size={24} />}</NavLink>
-              <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/4 -translate-y-1/6 bg-red-500 rounded-full">
-                5
-              </span>
+              {cart?.length <= 0 ? (
+                ""
+              ) : (
+                <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/4 -translate-y-1/6 bg-red-500 rounded-full">
+                  {cartLength}
+                </span>
+              )}
             </div>
             <div className="relative inline-block hover:bg-black/[0.07] p-2 rounded-full">
               <NavLink to="/profile">{<CgSmileMouthOpen size={24} />}</NavLink>

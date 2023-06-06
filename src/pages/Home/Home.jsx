@@ -8,11 +8,11 @@ import GenderCard from "../../Components/GenderCard";
 import Footer from "../../Components/Footer";
 import mens from "../../assets/images/mens.jpg";
 import womens from "../../assets/images/women.jpg";
-import { NavLink } from "react-router-dom";
 import { ProductsContext } from "../../contexts/ProductsContext";
 
 const Home = () => {
-  const { isLoading, trending } = useContext(ProductsContext);
+  const { trending } = useContext(ProductsContext);
+
   console.log(trending);
   return (
     <>
@@ -52,8 +52,8 @@ const Home = () => {
         <h1 className="font-semibold text-3xl">Trending</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-14 px-5 md:px-0">
           {trending &&
-            trending.map(({ _id, title, price, trending, images: [{ src }] }) => (
-              <ProductCard id={_id} title={title} price={price} image={src} trending={trending} key={_id}/>
+            trending.map((trending) => (
+              <ProductCard data={trending} key={trending._id} />
             ))}
         </div>
         <h1 className="font-semibold text-3xl">Who are you shopping for?</h1>

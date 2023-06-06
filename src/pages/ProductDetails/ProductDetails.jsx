@@ -1,22 +1,28 @@
 import React, { useContext, useEffect, useState } from "react";
 import Wrapper from "../../Components/Wrapper";
+import { NavLink } from "react-router-dom";
 import ProductDetailsCarousel from "../../Components/ProductDetailsCarousel";
-// import RelatedProducts from "../../Components/RelatedProducts";
 import { useParams } from "react-router-dom";
 import { ProductsContext } from "../../contexts/ProductsContext";
 import { CartContext } from "../../contexts/CartContext";
 
 const ProductDetails = () => {
-  const [selectedSize, setSelectedSize] = useState();
-  const [sizeError, setSizeError] = useState(false)
   const { id } = useParams();
   const { products } = useContext(ProductsContext);
-  const { addToCart } = useContext(CartContext);
+  const [buttonState, setButtonState] = useState(false);
+  const {
+    addToCart,
+    isItemPresentInCartHandler,
+    isItemPresentinWishlistHandler,
+    addToWishList,
+  } = useContext(CartContext);
 
   const product = products.find(({ _id }) => _id === id);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   if (!product) {
     return (
       <div className="w-full h-full flex justify-center items-center">
@@ -51,29 +57,22 @@ const ProductDetails = () => {
     brand,
     categoryName,
     images,
+    size,
   } = product;
 
   const handleAddToCart = () => {
-    if(!selectedSize){
-      setSizeError(true);
-      return;
-    }
-    addToCart(product, selectedSize)
-  }
+    const isItemPresentInCart = isItemPresentInCartHandler(product);
 
-  const sizes = [
-    { id: 1, size: 6 },
-    { id: 2, size: 7 },
-    { id: 3, size: 7.5 },
-    { id: 4, size: 8 },
-    { id: 5, size: 8.5 },
-    { id: 6, size: 9 },
-    { id: 7, size: 9.5 },
-    { id: 8, size: 10 },
-    { id: 9, size: 10.5 },
-    { id: 10, size: 11 },
-    { id: 11, size: 12 },
-  ];
+    if (isItemPresentInCart) {
+      // If the item is already present in the cart, navigate to the cart page
+      // You can replace the NavLink with the appropriate navigation method
+      window.location.href = "/cart";
+    } else {
+      // Add the item to the cart
+      addToCart(product);
+      setButtonState(true);
+    }
+  };
 
   return (
     <div className="w-full md:py-20">
@@ -88,8 +87,8 @@ const ProductDetails = () => {
           {/* right column start */}
           <div className="flex-[1] py-3">
             {/* product title */}
-            <div className="text-lg font-semibold">{brand}</div>
-            <div className="text-[34px] font-semibold mb-1">{title}</div>
+            <div className="text-lg font-semibold -mb-1">{brand}</div>
+            <div className="text-[34px] font-semibold">{title}</div>
 
             {/* product subtitle */}
             <div className="text-base font-semibold mb-5">{categoryName}</div>
@@ -106,55 +105,15 @@ const ProductDetails = () => {
             <div className="text-md font-medium text-green-500 mb-1">
               10% off
             </div>
-            <div className="text-md font-medium text-black/[0.5] mb-20">
+            <div className="text-md font-medium text-black/[0.5] mb-5">
               incl. of all taxes
             </div>
-
-            {/* product size range start */}
-            <div className="mb-10">
-              {/* heading start */}
-              <div className="flex justify-between mb-2">
-                <div className="text-md font-semibold">
-                  Select size
-                </div>
-              </div>
-              {/* heading ends */}
-              {/* size selection starts */}
-              <div className="grid grid-cols-3 gap-2">
-                {sizes.map(({ id, size }) => (
-                  <div
-                    key={id}
-                    className={`border rounded-lg text-center py-3 font-medium hover:border-black cursor-pointer ${selectedSize === size ? "border-black" : ""}`}
-                    onClick={() => {
-                      setSelectedSize(size);
-                      setSizeError(false);
-                    }}
-                  >
-                    UK {size}
-                  </div>
-                ))}
-                
-              </div>
-              {sizeError ? (<span className="text-sm font-semibold text-red-600">Select a  size!</span>) : ("")}
-              {/* size selection ends */}
+            <div className="text-md font-medium text-black/[0.5] mb-10">
+              Size: UK {size}
             </div>
-            {/* add to cart button start */}
-            <button
-              className="w-full py-4 rounded-full bg-black text-white text-lg font-medium duration-200 transition-transform active:scale-90 mb-3 hover:opacity-75"
-              onClick={() => handleAddToCart()}
-            >
-              Add to Cart
-            </button>
-            {/* add to cart button ends */}
-
-            {/* add to wishlist starts */}
-            <button className="w-full py-4 rounded-full border border-black text-lg font-medium transition-transform active:scale-90 duration-200 mb-3 hover:opacity-">
-              Add to Wishlist
-            </button>
-            {/* add to wishlist ends */}
 
             <div>
-              <div className="text-lg font-bold my-5">Product Details</div>
+              <div className="text-lg font-bold my-3">Product Details</div>
               <div className="text-md mb-5">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 Obcaecati odio architecto inventore incidunt laborum itaque hic
@@ -174,10 +133,35 @@ const ProductDetails = () => {
                 Beatae, possimus?
               </div>
             </div>
+
+            {!isItemPresentInCartHandler(product) ? (
+              <button
+                className="w-full py-4 rounded-full bg-black text-white text-lg font-medium duration-200 transition-transform active:scale-90 mb-3 hover:opacity-75"
+                onClick={handleAddToCart}
+              >
+                Add to Cart
+              </button>
+            ) : (
+              <div className="inline-flex justify-center w-full py-4 rounded-full bg-black text-white text-lg font-medium duration-200 transition-transform active:scale-90 mb-3 hover:opacity-75">
+                <NavLink to="/cart">Go to Cart</NavLink>
+              </div>
+            )}
+
+            {!isItemPresentinWishlistHandler(product) ? (
+              <button
+                className="w-full py-4 rounded-full border border-black text-lg font-medium transition-transform active:scale-90 duration-200 mb-3"
+                onClick={() => addToWishList(product)}
+              >
+                Add to Wishlist
+              </button>
+            ) : (
+              <NavLink to="/wishlist"><button className="inline-flex justify-center w-full py-4 rounded-full border border-black text-black text-lg font-medium duration-200 transition-transform active:scale-90 mb-3 hover:opacity-75">
+                Go to wishlist
+              </button></NavLink>
+            )}
           </div>
           {/* right column ends */}
         </div>
-        {/* <RelatedProducts /> */}
       </Wrapper>
     </div>
   );
