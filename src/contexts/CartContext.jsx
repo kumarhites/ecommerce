@@ -1,6 +1,8 @@
 import { createContext, useReducer, useState } from "react";
 import { cartReducer } from "../reducers/cartReducer";
 import axios from "axios";
+import { toast } from "react-hot-toast";
+// import { AuthContext } from "./AuthContext";
 
 export const CartContext = createContext();
 
@@ -10,8 +12,10 @@ const initialState = {
 };
 
 const TOKEN = localStorage.getItem("token");
+// console.log("TOKEN", TOKEN);
 
 export const CartProvider = ({ children }) => {
+  // const { isLoggedIn } = useContext(AuthContext);
   const [error, setError] = useState(false);
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
@@ -60,9 +64,11 @@ export const CartProvider = ({ children }) => {
       if (response.status === 201) {
         const cartItems = response.data.cart;
         dispatch({ type: "SET_CART", payload: cartItems });
+        toast.success("Item added to cart successfully!");
       }
     } catch (error) {
       console.log(error);
+      toast.error("Unable to add to cart!");
     }
   };
 
@@ -80,10 +86,11 @@ export const CartProvider = ({ children }) => {
       if (response.status === 201) {
         const wishlistItem = response.data.wishlist;
         dispatch({ type: "SET_WISHLIST", payload: wishlistItem });
-        console.log(wishlistItem);
+        toast.success(`Item added to wishlist successfully!`);
       }
     } catch (error) {
       console.log(error);
+      toast.error("Unable to add to wishlist!");
     }
   };
 
@@ -93,7 +100,7 @@ export const CartProvider = ({ children }) => {
       authorization: TOKEN,
     };
     try {
-      if (type === "decrement" && product.qty === 1) {
+      if (type === "decrement" && product.qty <= 1) {
         removeItemFromCart(product);
         // return;
       } else {
@@ -109,9 +116,9 @@ export const CartProvider = ({ children }) => {
         if (response.status === 200) {
           // setCartLoading(false);
           if (type === "decrement") {
-            console.log(`Removed one ${product.title} from the cart!`);
+            toast.success(`Removed one ${product.title} from the cart!`);
           } else {
-            console.log(`Added another ${product.title} to the cart!`);
+            toast.success(`Added another ${product.title} to the cart!`);
           }
           dispatch({ type: "SET_CART", payload: response.data.cart });
         }
@@ -133,6 +140,7 @@ export const CartProvider = ({ children }) => {
       if (response.status === 200) {
         const cartItems = response.data.cart;
         dispatch({ type: "SET_CART", payload: cartItems });
+        toast.success(`Removed ${product.title} from your cart!`);
       }
     } catch (error) {
       console.log(error);
@@ -150,6 +158,7 @@ export const CartProvider = ({ children }) => {
       if (response.status === 200) {
         const wishlistItem = response.data.wishlist;
         dispatch({ type: "SET_WISHLIST", payload: wishlistItem });
+        toast.success(`Removed ${product.title} from your cart!`);
       }
     } catch (error) {
       console.log(error);
@@ -164,7 +173,7 @@ export const CartProvider = ({ children }) => {
   //check if the item is present in wishlist
   const isItemPresentinWishlistHandler = (product) => {
     return state.wishlist.find(({ _id }) => product._id === _id);
-};
+  };
 
   useState(() => {
     getCartItems();

@@ -4,8 +4,8 @@ import { AuthContext } from "../contexts/AuthContext";
 
 export const PrivateRoute = () => {
   const location = useLocation();
-  const { isLoggedIn } = useContext(AuthContext);
-  return isLoggedIn ? (
+  const { token } = useContext(AuthContext);
+  return token ? (
     <Outlet />
   ) : (
     <Navigate to="/login" state={{ from: location }} />

@@ -69,7 +69,7 @@ export const products = [
     gender: "Men",
     category: ["Lifestyle", "Running"],
     trending: true,
-    rating: "5.0",
+    rating: 5.0,
     size: 8,
     images: [
       {
@@ -99,7 +99,7 @@ export const products = [
     gender: "Men",
     category: ["Gym and Training", "Running"],
     trending: true,
-    rating: "4.8",
+    rating: 4.8,
     size: 9,
     images: [
       {
@@ -123,13 +123,13 @@ export const products = [
   {
     _id: "62f89fcdd3f0aa3df7ca94ec",
     id: 3,
-    title: "RS-X Efekt Turbo Unisex Sneakers",
+    title: "RS-X Efekt Turbo",
     brand: "Puma",
     price: 7204.2,
     gender: "Women",
     category: ["Lifestyle", "Running"],
     trending: false,
-    rating: "4.7",
+    rating: 4.7,
     size: 10,
     images: [
       {
@@ -153,13 +153,13 @@ export const products = [
   {
     _id: "62f89fcdd3f0fg3df7ca94ec",
     id: 4,
-    title: "RS-X Efekt Turbo Unisex Sneakers",
+    title: "RS-X Efekt Turbo",
     brand: "Puma",
     price: 5199.2,
     gender: "Women",
     category: ["Football", "Running"],
     trending: true,
-    rating: "4.7",
+    rating: 4.7,
     size: 6,
     images: [
       {

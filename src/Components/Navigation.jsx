@@ -6,10 +6,12 @@ import { IoBagOutline, IoMenu } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
 import { RiSearchLine, RiHeart3Line } from "react-icons/ri";
 import { CgSmileMouthOpen } from "react-icons/cg";
+import { AuthContext } from "../contexts/AuthContext";
 
 // import NavCSS from "../assets/styles/Navigation.module.css";
 import MenuMobile from "./MenuMobile";
 import { CartContext } from "../contexts/CartContext";
+
 
 const Navigation = () => {
   const [show, setShow] = useState("translate-y-0");
@@ -17,6 +19,7 @@ const Navigation = () => {
   const [showCategory, setShowCategory] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const { cart, wishlist } = useContext(CartContext);
+  const {token} = useContext(AuthContext);
   const cartLength = cart.length;
   const wishlistLength = wishlist.length;
 
@@ -65,7 +68,7 @@ const Navigation = () => {
           {/* icons menu start */}
           <div className="flex items-center gap-0 md:gap-5 text-black">
             <div className="hover:bg-black/[0.07] p-2 rounded-full">
-              <NavLink to="/search">{<RiSearchLine size={24} />}</NavLink>
+              <NavLink to="/products">{<RiSearchLine size={24} />}</NavLink>
             </div>
             <div className="relative inline-block  hover:bg-black/[0.07] p-2 rounded-full">
               <NavLink to="/wishlist">{<RiHeart3Line size={24} />}</NavLink>
@@ -87,9 +90,11 @@ const Navigation = () => {
                 </span>
               )}
             </div>
-            <div className="relative inline-block hover:bg-black/[0.07] p-2 rounded-full">
+            {token ? <div className="relative inline-block hover:bg-black/[0.07] p-2 rounded-full">
               <NavLink to="/profile">{<CgSmileMouthOpen size={24} />}</NavLink>
-            </div>
+            </div> : <div className="text-sm font-bold bg-black text-white relative inline-block hover:shadow-md p-2 rounded-lg">
+              <NavLink to="/login">Login/Signup</NavLink>
+            </div>}
             {/* mobile menu starts */}
             <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05]cursor-pointer relative md:hidden">
               {mobileMenu ? (

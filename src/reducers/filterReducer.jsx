@@ -47,9 +47,27 @@ const filterReducer = (state, action) => {
             genderInput: [...state.genderInput, action.payload],
           };
 
+    case "RATING_FILTER":
+      return { ...state, ratingInput: action.payload };
+
+    case "CLEAR_FILTER":
+      return {
+        ...initialState,
+        filterProducts: action.payload,
+      };
     default:
       return state;
   }
+};
+
+export const initialState = {
+  filterProducts: [],
+  searchInput: "",
+  sortInput: "",
+  ratingInput: "1",
+  categoryInput: [],
+  brandInput: [],
+  genderInput: [],
 };
 
 export default filterReducer;

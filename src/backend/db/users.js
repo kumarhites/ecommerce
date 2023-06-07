@@ -10,9 +10,11 @@ export const users = [
   {
     _id: uuid(),
     firstName: "Adarsh",
-    lastName: "Balika",
+    lastName: "Balak",
     email: "adarshbalika@gmail.com",
     password: "adarshbalika",
+    address:
+      "H.no 8, Bidhannagar, Tank Road, Uliyan, Kadma , Jamshedpur, 831005 +91-123456789",
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },

@@ -4,13 +4,15 @@ import { FilterContext } from "../contexts/FilterContext";
 import { ProductsContext } from "../contexts/ProductsContext";
 
 const Sidebar = ({ categories, brands }) => {
-  const { sortInput, dispatch, categoryInput, genderInput } =
-    useContext(FilterContext);
-
-  const [rangeValue, setRangeValue] = useState(1);
-  const handleRangeInput = (e) => {
-    setRangeValue(e.target.value);
-  };
+  const {
+    sortInput,
+    dispatch,
+    categoryInput,
+    genderInput,
+    filterProducts,
+    ratingInput,
+    brandInput,
+  } = useContext(FilterContext);
 
   return (
     <>
@@ -19,7 +21,12 @@ const Sidebar = ({ categories, brands }) => {
           <div className="flex justify-between mb-3">
             <div className="text-lg font-bold">Filters</div>
             <div className="text-lg font-bold">
-              <button className="justify-center rounded-md bg-black/[0.7] px-2 py-1 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-black/[0.5]">
+              <button
+                className="justify-center rounded-md bg-black/[0.7] px-2 py-1 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-black/[0.5]"
+                onClick={() =>
+                  dispatch({ type: "CLEAR_FILTER", payload: filterProducts })
+                }
+              >
                 Clear all filters
               </button>
             </div>
@@ -69,6 +76,7 @@ const Sidebar = ({ categories, brands }) => {
                       name={brandName}
                       type="checkbox"
                       value={brandName}
+                      checked={brandInput.includes(brandName)}
                       readOnly
                       onClick={() =>
                         dispatch({
@@ -189,10 +197,14 @@ const Sidebar = ({ categories, brands }) => {
           <div className="border-t border-b py-5">
             <p className="text-base font-semibold">Sort By Rating</p>
             <div className="flex items-center">
-              <p className="text-base font-semibold">{rangeValue}</p>
-              <span className="px-2">
-                <AiFillStar color="gold" />
+              <span className="pr-2">
+                <AiFillStar
+                  size={20}
+                  color="gold"
+                  className="transition-transform duration-300"
+                />
               </span>
+              <p className="text-base font-semibold">{ratingInput}</p>
             </div>
             <div className="mt-1">
               <input
@@ -201,8 +213,13 @@ const Sidebar = ({ categories, brands }) => {
                 min="1"
                 max="5"
                 step="1"
-                value={rangeValue}
-                onChange={(e) => handleRangeInput(e)}
+                value={ratingInput}
+                onChange={(e) =>
+                  dispatch({
+                    type: "RATING_FILTER",
+                    payload: e.target.value,
+                  })
+                }
                 className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
               />
             </div>

@@ -4,13 +4,18 @@ import { IoMdHeartEmpty } from "react-icons/io";
 import { IoHeart } from "react-icons/io5";
 import { AiFillStar } from "react-icons/ai";
 import { CartContext } from "../contexts/CartContext";
-// import { AddToCartButton } from "./AddToCartButton";
+import { AuthContext } from "../contexts/AuthContext";
+import { toast } from "react-hot-toast";
 
 const ProductCard = ({ data }) => {
+  const { token } = useContext(AuthContext);
   const {
     addToWishList,
     isItemPresentinWishlistHandler,
     removeItemFromWishlist,
+    removeItemFromCart,
+    addToCart,
+    isItemPresentInCartHandler,
   } = useContext(CartContext);
   const {
     _id,
@@ -26,7 +31,7 @@ const ProductCard = ({ data }) => {
   } = data;
   return (
     <div
-      className="transform duration-200 hover:scale-105 cursor-pointer rounded-lg hover:shadow-sm"
+      className="transform duration-200 cursor-pointer rounded-lg hover:shadow-xl"
       key={_id}
     >
       <NavLink to={`/productDetails/${_id}`}>
@@ -54,17 +59,59 @@ const ProductCard = ({ data }) => {
           )}
           <div>
             {!isItemPresentinWishlistHandler(data) ? (
-              <button onClick={() => addToWishList(data)}>
+              <button
+                onClick={() => {
+                  if (!token) {
+                    toast.error("Please login to continue");
+                    return;
+                  }
+                  addToWishList(data);
+                }}
+              >
                 <IoMdHeartEmpty size={24} color={"red"} />
               </button>
             ) : (
-              <button onClick={() => removeItemFromWishlist(data)}>
+              <button
+                onClick={() => {
+                  if (!token) {
+                    toast.error("Please login to continue");
+                    return;
+                  }
+                  removeItemFromWishlist(data);
+                }}
+              >
                 <IoHeart size={24} color={"red"} />
               </button>
             )}
           </div>
         </div>
       </div>
+      {!isItemPresentInCartHandler(data) ? (
+        <button
+          className="w-full bg-black text-white rounded-lg py-2 text-semibold"
+          onClick={() => {
+            if (!token) {
+              toast.error("Please login to continue");
+              return;
+            }
+            addToCart(data);
+          }}
+        >
+          Add to cart
+        </button>
+      ) : (
+        <div
+          className="w-full bg-black text-white rounded-lg py-2 text-semibold text-center"
+          onClick={() => {
+            if (!token) {
+              toast.error("Please login to continue");
+              return;
+            }
+          }}
+        >
+          <NavLink to="/cart">Go to cart</NavLink>
+        </div>
+      )}
     </div>
   );
 };

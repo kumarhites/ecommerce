@@ -10,7 +10,7 @@ import Signup from "./pages/Signup/Signup";
 import Footer from "./Components/Footer";
 import Products from "./pages/Products/Products";
 import ProductDetails from "./pages/ProductDetails/ProductDetails";
-
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -27,6 +27,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/products" element={<Products />} />
         <Route path="/productDetails/:id" element={<ProductDetails />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
   );

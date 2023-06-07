@@ -4,19 +4,20 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { Toaster } from "react-hot-toast";
 
 export default function Signup() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { signupHandler, error, setError, validateEmail, validatePassword } =
-    useContext(AuthContext);
+  const { signUpHandler, error, setError } = useContext(AuthContext);
   const [userSignupDetails, setUserSignupDetails] = useState({
     firstname: "",
     lastname: "",
     email: "",
     password: "",
+    confirmPassword: "",
   });
-  const [confirmPassword, setConfirmPassword] = useState("");
+  // const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showCnfPassword, setShowCnfPassword] = useState(false);
 
@@ -47,21 +48,21 @@ export default function Signup() {
       return;
     }
 
-    if (
-      !validateEmail(userSignupDetails.email) ||
-      !validatePassword(userSignupDetails.password)
-    ) {
-      setError("Email or password is not valid");
-      return;
-    }
-    if (userSignupDetails.password !== confirmPassword) {
-      setError("Passwords don't match!");
-      return;
-    }
-    signupHandler(userSignupDetails, () => {
+    // if (
+    //   !validateEmail(userSignupDetails.email) ||
+    //   !validatePassword(userSignupDetails.password)
+    // ) {
+    //   setError("Email or password is not valid");
+    //   return;
+    // }
+    // if (userSignupDetails.password !== userSignupDetails.confirmPassword) {
+    //   setError("Passwords don't match!");
+    //   return;
+    // }
+    signUpHandler(userSignupDetails, () => {
       navigate("/");
-    })
-    console.log(userSignupDetails);
+    });
+    // console.log(userSignupDetails);
   };
 
   // // Function to handle test login and update state
@@ -82,6 +83,18 @@ export default function Signup() {
 
   return (
     <>
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+        containerStyle={{ top: "5%" }}
+        toastOptions={{
+          style: {
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+          },
+        }}
+      />
       <div className="flex flex-col justify-center px-14 py-20 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h1 className="mt-10 text-center text-4xl font-[500] leading-9 tracking-tight text-gray-900 font-primary">
@@ -226,14 +239,14 @@ export default function Signup() {
                   </button>
                 </span>
                 <input
-                  id="cnfPassword"
-                  name="cnfPassword"
+                  id="confirmPassword"
+                  name="confirmPassword"
                   type={showCnfPassword ? "text" : "password"}
                   required
                   placeholder="Enter your password again "
                   className="input"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  value={userSignupDetails.confirmPassword}
+                  onChange={handleInput}
                 />
               </div>
             </div>

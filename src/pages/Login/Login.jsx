@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 import "./Login.css";
 
 function Login() {
@@ -33,13 +34,13 @@ function Login() {
       return;
     }
 
-    if (
-      !validateEmail(userLoginDetails.email) ||
-      !validatePassword(userLoginDetails.password)
-    ) {
-      setError("Email or password is not valid");
-      return;
-    }
+    // if (
+    //   !validateEmail(userLoginDetails.email) ||
+    //   !validatePassword(userLoginDetails.password)
+    // ) {
+    //   setError("Email or password is not valid");
+    //   return;
+    // }
 
     loginHandler(userLoginDetails, () => {
       navigate(location?.state?.from?.pathname);
@@ -55,7 +56,7 @@ function Login() {
     setUserLoginDetails(testLogin);
 
     try {
-      await loginHandler(testLogin); // Use testLogin instead of userLoginDetails
+      await loginHandler(testLogin); // testlogin
       navigate(location?.state?.from?.pathname);
     } catch (error) {
       console.error("Login error:", error);
@@ -64,6 +65,18 @@ function Login() {
 
   return (
     <>
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+        containerStyle={{ top: "5%" }}
+        toastOptions={{
+          style: {
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+          },
+        }}
+      />
       <div className="flex flex-col justify-center px-14 py-20 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h1 className="mt-10 text-center text-4xl font-[500] leading-9 tracking-tight text-gray-900 font-primary">

@@ -1,18 +1,8 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import { ProductsContext } from "./ProductsContext";
-import filterReducer from "../reducers/filterReducer";
+import filterReducer, { initialState } from "../reducers/filterReducer";
 
 export const FilterContext = createContext();
-
-const initialState = {
-  filterProducts: [],
-  searchInput: "",
-  sortInput: "",
-  ratingInput: "1.0",
-  categoryInput: [],
-  brandInput: [],
-  genderInput: [],
-};
 
 export const FilterProvider = ({ children }) => {
   const { products } = useContext(ProductsContext);
@@ -63,6 +53,10 @@ export const FilterProvider = ({ children }) => {
         )
       : brandFilteredProducts;
 
+  const ratingFilter = genderFilteredProducts?.filter(
+    ({ rating }) => rating >= state?.ratingInput
+  );
+
   useEffect(() => {
     dispatch({ type: "LOAD_PRODUCTS", payload: products });
   }, [products]);
@@ -72,7 +66,8 @@ export const FilterProvider = ({ children }) => {
       value={{
         ...state,
         dispatch,
-        genderFilteredProducts,
+        ratingFilter,
+        initialState,
       }}
     >
       {children}

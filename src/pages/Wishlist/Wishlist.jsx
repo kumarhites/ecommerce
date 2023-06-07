@@ -4,6 +4,7 @@ import Wrapper from "../../Components/Wrapper";
 import { CartContext } from "../../contexts/CartContext";
 import { BsHeartbreakFill } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 const Wishlist = () => {
   const { wishlist } = useContext(CartContext);
@@ -23,6 +24,18 @@ const Wishlist = () => {
     //   </Wrapper>
     // </div>
     <div className="w-full md:py-20 top-[70px] relative">
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+        containerStyle={{ top: "5%" }}
+        toastOptions={{
+          style: {
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+          },
+        }}
+      />
       <Wrapper>
         {/* heading start */}
         <div className="text-center max-w-[800px] mx-auto mt-2 md:mt-0 ">
@@ -46,10 +59,7 @@ const Wishlist = () => {
                 <div className="flex-[2]">
                   <div className="grid md:grid-cols-3 gap-8">
                     {wishlist.map((product) => (
-                      <ProductCard
-                        data={product}
-                        key={product._id}
-                      />
+                      <ProductCard data={product} key={product._id} />
                     ))}
                   </div>
                 </div>

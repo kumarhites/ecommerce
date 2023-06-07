@@ -5,8 +5,11 @@ import ProductDetailsCarousel from "../../Components/ProductDetailsCarousel";
 import { useParams } from "react-router-dom";
 import { ProductsContext } from "../../contexts/ProductsContext";
 import { CartContext } from "../../contexts/CartContext";
+import { AuthContext } from "../../contexts/AuthContext";
+import { Toaster, toast } from "react-hot-toast";
 
 const ProductDetails = () => {
+  const { isLoggedIn } = useContext(AuthContext);
   const { id } = useParams();
   const { products } = useContext(ProductsContext);
   const [buttonState, setButtonState] = useState(false);
@@ -61,6 +64,10 @@ const ProductDetails = () => {
   } = product;
 
   const handleAddToCart = () => {
+    if (!isLoggedIn) {
+      toast.error("Please login to continue");
+      return;
+    }
     const isItemPresentInCart = isItemPresentInCartHandler(product);
 
     if (isItemPresentInCart) {
@@ -74,8 +81,28 @@ const ProductDetails = () => {
     }
   };
 
+  const handleAddToWishlist = () => {
+    if (!isLoggedIn) {
+      toast.error("Please login to continue");
+      return;
+    }
+    addToWishList(product);
+  };
+
   return (
     <div className="w-full md:py-20">
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+        containerStyle={{ top: "5%" }}
+        toastOptions={{
+          style: {
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+          },
+        }}
+      />
       <Wrapper>
         <div className="flex flex-col lg:flex-row md:px-10 gap-[50px] lg:gap-[100px]">
           {/* left column start */}
@@ -150,14 +177,16 @@ const ProductDetails = () => {
             {!isItemPresentinWishlistHandler(product) ? (
               <button
                 className="w-full py-4 rounded-full border border-black text-lg font-medium transition-transform active:scale-90 duration-200 mb-3"
-                onClick={() => addToWishList(product)}
+                onClick={handleAddToWishlist}
               >
                 Add to Wishlist
               </button>
             ) : (
-              <NavLink to="/wishlist"><button className="inline-flex justify-center w-full py-4 rounded-full border border-black text-black text-lg font-medium duration-200 transition-transform active:scale-90 mb-3 hover:opacity-75">
-                Go to wishlist
-              </button></NavLink>
+              <NavLink to="/wishlist">
+                <button className="inline-flex justify-center w-full py-4 rounded-full border border-black text-black text-lg font-medium duration-200 transition-transform active:scale-90 mb-3 hover:opacity-75">
+                  Go to wishlist
+                </button>
+              </NavLink>
             )}
           </div>
           {/* right column ends */}
