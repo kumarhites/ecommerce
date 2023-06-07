@@ -7,6 +7,7 @@ import { ProductsContext } from "../../contexts/ProductsContext";
 import { CartContext } from "../../contexts/CartContext";
 import { AuthContext } from "../../contexts/AuthContext";
 import { Toaster, toast } from "react-hot-toast";
+// import RelatedProducts from "../../Components/RelatedProducts"
 
 const ProductDetails = () => {
   const { isLoggedIn } = useContext(AuthContext);
@@ -190,6 +191,7 @@ const ProductDetails = () => {
             )}
           </div>
           {/* right column ends */}
+          {/* <RelatedProducts /> */}
         </div>
       </Wrapper>
     </div>

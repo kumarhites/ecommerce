@@ -6,8 +6,10 @@ import { AiFillStar } from "react-icons/ai";
 import { CartContext } from "../contexts/CartContext";
 import { AuthContext } from "../contexts/AuthContext";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({ data }) => {
+  const navigate = useNavigate();
   const { token } = useContext(AuthContext);
   const {
     addToWishList,
@@ -92,6 +94,7 @@ const ProductCard = ({ data }) => {
           onClick={() => {
             if (!token) {
               toast.error("Please login to continue");
+              navigate("/login");
               return;
             }
             addToCart(data);
@@ -105,7 +108,7 @@ const ProductCard = ({ data }) => {
           onClick={() => {
             if (!token) {
               toast.error("Please login to continue");
-              return;
+              navigate("/login");
             }
           }}
         >
