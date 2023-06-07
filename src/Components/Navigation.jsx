@@ -12,14 +12,13 @@ import { AuthContext } from "../contexts/AuthContext";
 import MenuMobile from "./MenuMobile";
 import { CartContext } from "../contexts/CartContext";
 
-
 const Navigation = () => {
   const [show, setShow] = useState("translate-y-0");
   const [mobileMenu, setMobileMenu] = useState(false);
   const [showCategory, setShowCategory] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const { cart, wishlist } = useContext(CartContext);
-  const {token} = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
   const cartLength = cart.length;
   const wishlistLength = wishlist.length;
 
@@ -70,31 +69,45 @@ const Navigation = () => {
             <div className="hover:bg-black/[0.07] p-2 rounded-full">
               <NavLink to="/products">{<RiSearchLine size={24} />}</NavLink>
             </div>
-            <div className="relative inline-block  hover:bg-black/[0.07] p-2 rounded-full">
-              <NavLink to="/wishlist">{<RiHeart3Line size={24} />}</NavLink>
-              {wishlist?.length <= 0 ? (
-                ""
-              ) : (
-                <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/4 -translate-y-1/6 bg-red-500 rounded-full">
-                  {wishlistLength}
-                </span>
-              )}
-            </div>
-            <div className="relative inline-block hover:bg-black/[0.07] p-2 rounded-full">
-              <NavLink to="/cart">{<IoBagOutline size={24} />}</NavLink>
-              {cart?.length <= 0 ? (
-                ""
-              ) : (
-                <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/4 -translate-y-1/6 bg-red-500 rounded-full">
-                  {cartLength}
-                </span>
-              )}
-            </div>
-            {token ? <div className="relative inline-block hover:bg-black/[0.07] p-2 rounded-full">
-              <NavLink to="/profile">{<CgSmileMouthOpen size={24} />}</NavLink>
-            </div> : <div className="text-sm font-bold bg-black text-white relative inline-block hover:shadow-md p-2 rounded-lg">
-              <NavLink to="/login">Login/Signup</NavLink>
-            </div>}
+            {token ? (
+              <div className="relative inline-block  hover:bg-black/[0.07] p-2 rounded-full">
+                <NavLink to="/wishlist">{<RiHeart3Line size={24} />}</NavLink>
+                {wishlist?.length <= 0 ? (
+                  ""
+                ) : (
+                  <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/4 -translate-y-1/6 bg-red-500 rounded-full">
+                    {wishlistLength}
+                  </span>
+                )}
+              </div>
+            ) : (
+              ""
+            )}
+            {token ? (
+              <div className="relative inline-block hover:bg-black/[0.07] p-2 rounded-full">
+                <NavLink to="/cart">{<IoBagOutline size={24} />}</NavLink>
+                {cart?.length <= 0 ? (
+                  ""
+                ) : (
+                  <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/4 -translate-y-1/6 bg-red-500 rounded-full">
+                    {cartLength}
+                  </span>
+                )}
+              </div>
+            ) : (
+              ""
+            )}
+            {token ? (
+              <div className="relative inline-block hover:bg-black/[0.07] p-2 rounded-full">
+                <NavLink to="/profile">
+                  {<CgSmileMouthOpen size={24} />}
+                </NavLink>
+              </div>
+            ) : (
+              <div className="text-sm font-bold bg-black text-white relative inline-block hover:shadow-md p-2 rounded-lg">
+                <NavLink to="/login">Login/Signup</NavLink>
+              </div>
+            )}
             {/* mobile menu starts */}
             <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05]cursor-pointer relative md:hidden">
               {mobileMenu ? (

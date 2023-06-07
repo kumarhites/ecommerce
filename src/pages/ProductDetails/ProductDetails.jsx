@@ -10,7 +10,7 @@ import { Toaster, toast } from "react-hot-toast";
 // import RelatedProducts from "../../Components/RelatedProducts"
 
 const ProductDetails = () => {
-  const { isLoggedIn } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
   const { id } = useParams();
   const { products } = useContext(ProductsContext);
   const [buttonState, setButtonState] = useState(false);
@@ -65,7 +65,7 @@ const ProductDetails = () => {
   } = product;
 
   const handleAddToCart = () => {
-    if (!isLoggedIn) {
+    if (!token) {
       toast.error("Please login to continue");
       return;
     }
@@ -83,7 +83,7 @@ const ProductDetails = () => {
   };
 
   const handleAddToWishlist = () => {
-    if (!isLoggedIn) {
+    if (!token) {
       toast.error("Please login to continue");
       return;
     }
@@ -127,12 +127,12 @@ const ProductDetails = () => {
                 MRP: ₹{price}
               </div>
               <div className="text-md font-medium text-black/[0.5] line-through">
-                ₹2500
+                ₹13000
               </div>
             </div>
-            <div className="text-md font-medium text-green-500 mb-1">
+            {/* <div className="text-md font-medium text-green-500 mb-1">
               10% off
-            </div>
+            </div> */}
             <div className="text-md font-medium text-black/[0.5] mb-5">
               incl. of all taxes
             </div>
@@ -143,22 +143,30 @@ const ProductDetails = () => {
             <div>
               <div className="text-lg font-bold my-3">Product Details</div>
               <div className="text-md mb-5">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Obcaecati odio architecto inventore incidunt laborum itaque hic
-                commodi, provident, et blanditiis similique voluptates ex nulla
-                alias deleniti sunt facere? Soluta distinctio ut facere
-                voluptatum rem sunt autem, earum labore consequatur, dolore
-                deserunt esse suscipit debitis perferendis porro quos dolorem.
-                Beatae, possimus?
+                Introducing the sensational {product.title}, a true masterpiece
+                of footwear innovation that will elevate your style and take
+                your fashion game to extraordinary heights! Prepare to be
+                captivated by the sheer brilliance and unparalleled
+                craftsmanship of this remarkable creation.
               </div>
               <div className="text-md mb-5">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Obcaecati odio architecto inventore incidunt laborum itaque hic
-                commodi, provident, et blanditiis similique voluptates ex nulla
-                alias deleniti sunt facere? Soluta distinctio ut facere
-                voluptatum rem sunt autem, earum labore consequatur, dolore
-                deserunt esse suscipit debitis perferendis porro quos dolorem.
-                Beatae, possimus?
+                Feast your eyes on the sleek and modern design that seamlessly
+                blends timeless aesthetics with contemporary trends. The
+                striking silhouette of our shoe exudes confidence and charisma,
+                instantly turning heads wherever you go. Every curve and line
+                has been carefully sculpted to create a harmonious balance
+                between style and functionality. Step into a world of unrivaled
+                comfort with the plush interior of our shoe. The luxuriously
+                soft and breathable materials caress your feet, providing a
+                heavenly sensation with every step. It's like walking on clouds,
+                ensuring that you feel refreshed and energized throughout the
+                day. But it's not just about comfort and style; our shoe is
+                engineered for peak performance. The cutting-edge technology
+                incorporated into its design ensures optimal support, stability,
+                and flexibility. Whether you're strolling through city streets
+                or conquering the dance floor, our shoe will be your reliable
+                companion, empowering you to conquer any challenge with grace
+                and confidence.
               </div>
             </div>
 

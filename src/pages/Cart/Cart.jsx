@@ -8,7 +8,7 @@ import { Toaster } from "react-hot-toast";
 import { AuthContext } from "../../contexts/AuthContext";
 
 const Cart = () => {
-  const { cart, removeItemFromCart } = useContext(CartContext);
+  const { cart, removeItemFromCart, removeItemFromWishlist } = useContext(CartContext);
   const { currentUser } = useContext(AuthContext);
 
   const emptyCart = () => {
