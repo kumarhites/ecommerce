@@ -44,7 +44,7 @@ const ProductCard = ({ data }) => {
       <div className="absolute w-[90%] top-3 right-5">
         <div className="flex justify-between mx-auto">
           {trending ? (
-            <span className=" inline-flex items-center text-sm font-bold text-black/[0.7] border border-black/[0.7] px-2 rounded-lg ">
+            <span className=" inline-flex items-center text-sm font-bold text-white border bg-green-500 px-2 rounded-full ">
               Trending
             </span>
           ) : (

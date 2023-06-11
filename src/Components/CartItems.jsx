@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { RiAddLine } from "react-icons/ri";
 import { CgMathMinus } from "react-icons/cg";
@@ -6,50 +6,17 @@ import { CartContext } from "../contexts/CartContext";
 
 const CartItems = ({ item }) => {
   const [disabled, setDisabled] = useState(false);
-  const { cartCountHandler, removeItemFromCart, error } =
-    useContext(CartContext);
+  const { cartCountHandler, removeItemFromCart } = useContext(CartContext);
   const {
     brand,
-    categoryName,
-    _id,
+    gender,
     price,
     qty,
-    rating,
     size,
     title,
     images: [{ src }],
   } = item;
 
-  // const sizes = [
-  //   { id: 1, size: 6 },
-  //   { id: 2, size: 7 },
-  //   { id: 3, size: 7.5 },
-  //   { id: 4, size: 8 },
-  //   { id: 5, size: 8.5 },
-  //   { id: 6, size: 9 },
-  //   { id: 7, size: 9.5 },
-  //   { id: 8, size: 10 },
-  //   { id: 9, size: 10.5 },
-  //   { id: 10, size: 11 },
-  //   { id: 11, size: 12 },
-  // ];
-  // const [qty, setQty] = useState(1);
-  // const handleQtyIncrease = () => {
-  //   setDisabled(false);
-  //   const newQty = qty + 1;
-  //   setQty(newQty);
-  // };
-  // const handleQtyDecrease = () => {
-  //   if (qty <= 1) {
-  //     setDisabled(true);
-  //     return;
-  //   }
-  //   const newQty = qty - 1;
-  //   setQty(newQty);
-  // };
-  // useEffect(() => {
-  //   handleQtyDecrease();
-  // },[]);
   return (
     <div className="flex py-5 gap-3 md:gap-5 border-b">
       {/* image */}
@@ -66,7 +33,7 @@ const CartItems = ({ item }) => {
             {title}
           </div>
           <div className="text-sm md:text-md font-medium text-black/[0.5] block md:hidden">
-            {categoryName}
+            {gender}'s Shoes
           </div>
           <div className="text-lg md:text-md font-bold text-black mt-2 flex flex-col">
             ₹ {price}
@@ -74,7 +41,7 @@ const CartItems = ({ item }) => {
         </div>
         {/* product subtitle */}
         <div className="text-md font-medium text-black/[0.6] hidden md:block">
-          {categoryName}
+          {gender}'s Shoes
         </div>
         {/* selector */}
         <div className="flex items-center justify-between mt-4">
@@ -109,7 +76,6 @@ const CartItems = ({ item }) => {
                   <RiAddLine />
                 </button>
               </div>
-              {/* {true ? (<span className="text-red-500">Qty cannot be less than 1</span>): ("")} */}
             </div>
           </div>
           <div

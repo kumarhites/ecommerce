@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import Wrapper from "../../Components/Wrapper";
 import { NavLink, useNavigate } from "react-router-dom";
 import ProductDetailsCarousel from "../../Components/ProductDetailsCarousel";
@@ -15,7 +15,6 @@ const ProductDetails = () => {
   const { token } = useContext(AuthContext);
   const { id } = useParams();
   const { products } = useContext(ProductsContext);
-  const [buttonState, setButtonState] = useState(false);
   const {
     addToCart,
     isItemPresentInCartHandler,
@@ -56,7 +55,6 @@ const ProductDetails = () => {
   }
 
   const {
-    _id,
     id: aliasId,
     title,
     price,
@@ -80,7 +78,6 @@ const ProductDetails = () => {
     } else {
       // Add the item to the cart
       addToCart(product);
-      setButtonState(true);
     }
   };
 

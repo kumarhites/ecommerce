@@ -95,7 +95,7 @@ const Profile = () => {
                           pincode,
                           phoneNumber,
                         }) => (
-                          <div className="flex items-center gap-2 border-b pb-3 w-full justify-around">
+                          <div className="flex items-center gap-2 border-b pb-3 w-full justify-around" key={_id}>
                             <div className="flex flex-col flex-[2]">
                               <p className="text-lg font-semibold">{name}</p>
                               <p className="text-sm font-semibold">

@@ -21,7 +21,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch({ type: "CLEAR_FILTER", payload: products });
-  }, []);
+  }, [dispatch, products]);
   // console.log(trending);
   return (
     <>

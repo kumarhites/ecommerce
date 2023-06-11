@@ -1,15 +1,11 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import "./Login.css";
 
 function Login() {
-  const {
-    // showPassword: { login },
-    // toggleLoginPassword,
-    loginHandler,
-  } = useContext(AuthContext);
+  const { loginHandler } = useContext(AuthContext);
 
   const [userLoginDetails, setUserLoginDetails] = useState({
     email: "",
@@ -87,9 +83,6 @@ function Login() {
                 >
                   Password <span>*</span>
                 </label>
-                <div className="text-sm">
-                  <a className="links">Forgot password?</a>
-                </div>
               </div>
               <div className="mt-2">
                 <input
@@ -105,14 +98,6 @@ function Login() {
                 />
               </div>
             </div>
-            {/* {error ? (
-              <p className="text-center text-sm text-red-600 font-bold p-0 m-0">
-                {error}
-              </p>
-            ) : (
-              ""
-            )} */}
-
             <div className="flex gap-3 flex-col">
               <button type="submit" className="loginBtn">
                 Sign in

@@ -2,22 +2,19 @@ import "../Login/Login.css";
 
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Toaster } from "react-hot-toast";
 
 export default function Signup() {
-  const navigate = useNavigate();
-  const location = useLocation();
   const { signUpHandler, error, setError } = useContext(AuthContext);
   const [userSignupDetails, setUserSignupDetails] = useState({
     firstname: "",
     lastname: "",
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
   });
-  // const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showCnfPassword, setShowCnfPassword] = useState(false);
 
@@ -41,22 +38,6 @@ export default function Signup() {
     console.log(userSignupDetails);
     signUpHandler(userSignupDetails);
   };
-
-  // // Function to handle test login and update state
-  // const handleTestLogin = async () => {
-  //   const testLogin = {
-  //     email: "adarshbalika@gmail.com",
-  //     password: "adarshbalika",
-  //   };
-  //   userSignupDetails(testLogin);
-
-  //   try {
-  //     await loginHandler(testLogin); // Use testLogin instead of userLoginDetails
-  //     navigate(location?.state?.from?.pathname);
-  //   } catch (error) {
-  //     console.error("Login error:", error);
-  //   }
-  // };
 
   return (
     <>

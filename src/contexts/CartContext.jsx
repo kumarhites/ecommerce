@@ -14,8 +14,6 @@ const initialState = {
 
 export const CartProvider = ({ children }) => {
   const { token } = useContext(AuthContext);
-  // const { isLoggedIn } = useContext(AuthContext);
-  const [error, setError] = useState(false);
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
   //get cart items
@@ -29,7 +27,7 @@ export const CartProvider = ({ children }) => {
         dispatch({ type: "SET_CART", payload: cartItems });
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -45,7 +43,7 @@ export const CartProvider = ({ children }) => {
         // console.log(response);
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -208,7 +206,6 @@ export const CartProvider = ({ children }) => {
         cartCountHandler,
         removeItemFromCart,
         removeItemFromWishlist,
-        error,
         orderSuccess,
       }}
     >

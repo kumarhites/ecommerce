@@ -1,7 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { FilterContext } from "../contexts/FilterContext";
-import { ProductsContext } from "../contexts/ProductsContext";
 
 const Sidebar = ({ categories, brands }) => {
   const {

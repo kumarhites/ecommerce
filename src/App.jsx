@@ -7,7 +7,6 @@ import Wishlist from "./pages/Wishlist/Wishlist";
 import Login from "./pages/Login/Login";
 import { PrivateRoute } from "./utils/ProtectedRoutes";
 import Signup from "./pages/Signup/Signup";
-import Footer from "./Components/Footer";
 import Products from "./pages/Products/Products";
 import ProductDetails from "./pages/ProductDetails/ProductDetails";
 import Profile from "./pages/Profile";

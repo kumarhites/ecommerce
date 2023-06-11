@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import Wrapper from "./Wrapper";
-import Menu from "./Menu";
 import { IoBagOutline, IoMenu } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
 import { RiSearchLine, RiHeart3Line } from "react-icons/ri";
@@ -22,33 +21,29 @@ const Navigation = () => {
   const cartLength = cart.length;
   const wishlistLength = wishlist.length;
 
-  const controlNavbar = () => {
-    if (window.scrollY > 300) {
-      if (window.scrollY > lastScrollY && !mobileMenu) {
-        setShow("-translate-y-[80px]");
-      } else {
-        setShow("shadow-sm");
-      }
-    } else {
-      setShow("translate-y-0");
-    }
-    setLastScrollY(window.scrollY);
-  };
-
   useEffect(() => {
+    const controlNavbar = () => {
+      if (window.scrollY > 300) {
+        if (window.scrollY > lastScrollY && !mobileMenu) {
+          setShow("-translate-y-[80px]");
+        } else {
+          setShow("shadow-sm");
+        }
+      } else {
+        setShow("translate-y-0");
+      }
+      setLastScrollY(window.scrollY);
+    };
+
     window.addEventListener("scroll", controlNavbar);
+
     return () => {
       window.removeEventListener("scroll", controlNavbar);
     };
-  }, [lastScrollY]);
+  }, [lastScrollY, mobileMenu]);
 
   return (
     <>
-      {/* <NavLink to="/home" >Home</NavLink> || 
-      <NavLink to="/cart" >Cart</NavLink> || 
-      <NavLink to="/wishlist" >Wishlist</NavLink> || 
-      <NavLink to="/test" >Test</NavLink> || 
-      <NavLink to="/login" >Login</NavLink> */}
       <header
         className={`w-full h-[50px] md:h-[60px] bg-white flex items-center justify-between z-20 fixed top-0 transition-transform duration-300 ${show}`}
       >
@@ -56,7 +51,6 @@ const Navigation = () => {
           <NavLink to="/" className="font-primary text-2xl ">
             KICKS.
           </NavLink>
-          <Menu showCategory={showCategory} setShowCategory={setShowCategory} />
           {mobileMenu && (
             <MenuMobile
               showCategory={showCategory}
