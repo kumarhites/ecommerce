@@ -1,27 +1,48 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Wrapper from "../../Components/Wrapper";
 import CartItems from "../../Components/CartItems";
 import Footer from "../../Components/Footer";
 import { NavLink } from "react-router-dom";
 import { CartContext } from "../../contexts/CartContext";
-import { Toaster } from "react-hot-toast";
+import { Toaster, toast } from "react-hot-toast";
 import { AuthContext } from "../../contexts/AuthContext";
+import MyModal from "../../Components/Modal";
 
 const Cart = () => {
-  const { cart, removeItemFromCart, removeItemFromWishlist } = useContext(CartContext);
+  const [showModal, setShowModal] = useState(false);
+  const { cart, orderSuccess } = useContext(CartContext);
   const { currentUser } = useContext(AuthContext);
+  const { address } = currentUser;
 
   const emptyCart = () => {
-    try {
-      for (let i = 0; i < cart?.length; i++) {
-        removeItemFromCart(cart[i]);
+    const selectedAddress = document.querySelector(
+      'input[name="addressOption"]:checked'
+    );
+    if (selectedAddress) {
+      try {
+        for (let i = 0; i < cart?.length; i++) {
+          orderSuccess(cart[i]);
+        }
+      } catch (err) {
+        console.error(err);
       }
-    } catch (err) {
-      console.error(err);
+    } else {
+      toast.error("Select an address to continue");
+      return;
     }
   };
+
+  const handleAddressModal = () => {
+    setShowModal(!showModal);
+  };
+
   return (
     <>
+      {!showModal ? (
+        ""
+      ) : (
+        <MyModal heading={"Add"} closeModal={handleAddressModal} />
+      )}
       <Toaster
         position="top-right"
         reverseOrder={false}
@@ -112,23 +133,61 @@ const Cart = () => {
                     </div>
                   </div>
                   <div className="border-y py-5 mt-5">
-                    <div className="text-lg font-bold mb-3">Shipping to</div>
-                    <div className="flex flex-col w-full">
-                      <h1 className="text-lg font-semibold">
-                        {currentUser.firstName} {currentUser.lastName}
-                      </h1>
-                      <address>{currentUser.address}</address>
+                    <div className="text-lg font-bold mb-3 py-3">
+                      Shipping to
+                    </div>
+                    {address?.map(
+                      ({
+                        _id,
+                        name,
+                        area,
+                        city,
+                        state,
+                        pincode,
+                        phoneNumber,
+                      }) => (
+                        <div className="flex items-center gap-2 justify-start border-b pb-3">
+                          <input
+                            id={_id}
+                            name="addressOption"
+                            type="radio"
+                            value={_id}
+                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-full hover:bg-black/[0.05]"
+                          />
+                          <label
+                            htmlFor={_id}
+                            className="ml-2 text-sm font-medium text-gray-900"
+                          >
+                            <div className="flex flex-col">
+                              <p className="text-lg font-semibold">{name}</p>
+                              <p className="text-sm font-semibold">
+                                {area}, {city}, {state}, {pincode}
+                              </p>
+                              <p className="text-sm font-semibold">
+                                {phoneNumber}
+                              </p>
+                            </div>
+                          </label>
+                        </div>
+                      )
+                    )}
+                    <div className="flex justify-center items-center pt-3">
+                      <button
+                        className="w-full py-4 my-4 md:my-2 rounded-full border border-black text-black text-lg font-medium transistion-transform active:scale-95 hover:opacity-75"
+                        onClick={handleAddressModal}
+                      >
+                        Add Address
+                      </button>
                     </div>
                   </div>
-
-                  <NavLink to="/">
-                    <button
-                      className="w-full py-4 my-4 md:my-10 rounded-full bg-black text-white text-lg font-medium transistion-transform active:scale-95 mb-3 hover:opacity-75"
-                      onClick={emptyCart}
-                    >
-                      Checkout
-                    </button>
-                  </NavLink>
+                  {/* <NavLink to="/"> */}
+                  <button
+                    className="w-full py-4 my-4 md:my-5 rounded-full bg-black text-white text-lg font-medium transistion-transform active:scale-95 mb-3 hover:opacity-75"
+                    onClick={emptyCart}
+                  >
+                    Checkout
+                  </button>
+                  {/* </NavLink> */}
                 </div>
               </div>
               {/* summary ends */}

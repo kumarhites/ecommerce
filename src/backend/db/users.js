@@ -9,12 +9,30 @@ import { formatDate } from "../utils/authUtils";
 export const users = [
   {
     _id: uuid(),
-    firstName: "Adarsh",
-    lastName: "Balak",
+    firstname: "Adarsh",
+    lastname: "Balak",
     email: "adarshbalika@gmail.com",
     password: "adarshbalika",
-    address:
-      "H.no 8, Bidhannagar, Tank Road, Uliyan, Kadma , Jamshedpur, 831005 +91-123456789",
+    address: [
+      {
+        _id: uuid(),
+        name: "Kim Seokjin",
+        area: "Gangnam-gu",
+        city: "Seoul",
+        state: "Seoul",
+        pincode: "106040",
+        phoneNumber: "1234567890",
+      },
+      {
+        _id: uuid(),
+        name: "Katrina Kaif",
+        area: "0B-09 & G-10 Ground Floor, Mourya House, Next to VIP Plaza, New Link Road, Andheri West",
+        city: "Mumbai",
+        state: "Maharashtra",
+        pincode: "400053",
+        phoneNumber: "1987654321",
+      },
+    ],
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },

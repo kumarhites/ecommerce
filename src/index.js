@@ -8,6 +8,7 @@ import { ProductsProvider, ProductsContext } from "./contexts/ProductsContext";
 import { makeServer } from "./server";
 import { CartProvider, CartContext } from "./contexts/CartContext";
 import { FilterProvider, FilterContext } from "./contexts/FilterContext";
+import { AddressProvider, AddressContext } from "./contexts/AddressContext";
 
 // Call make Server
 makeServer();
@@ -16,6 +17,7 @@ export { AuthContext };
 export { ProductsContext };
 export { CartContext };
 export { FilterContext };
+export { AddressContext };
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -24,9 +26,11 @@ root.render(
       <ProductsProvider>
         <FilterProvider>
           <AuthProvider>
-            <CartProvider>
-              <App />
-            </CartProvider>
+            <AddressProvider>
+              <CartProvider>
+                <App />
+              </CartProvider>
+            </AddressProvider>
           </AuthProvider>
         </FilterProvider>
       </ProductsProvider>

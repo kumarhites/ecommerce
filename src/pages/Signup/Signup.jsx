@@ -15,7 +15,7 @@ export default function Signup() {
     lastname: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    confirmPassword: ""
   });
   // const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -38,31 +38,8 @@ export default function Signup() {
 
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
-    if (userSignupDetails.email === "") {
-      setError("Email is required!");
-      return;
-    }
-
-    if (userSignupDetails.password === "") {
-      setError("Password is required!");
-      return;
-    }
-
-    // if (
-    //   !validateEmail(userSignupDetails.email) ||
-    //   !validatePassword(userSignupDetails.password)
-    // ) {
-    //   setError("Email or password is not valid");
-    //   return;
-    // }
-    // if (userSignupDetails.password !== userSignupDetails.confirmPassword) {
-    //   setError("Passwords don't match!");
-    //   return;
-    // }
-    signUpHandler(userSignupDetails, () => {
-      navigate("/");
-    });
-    // console.log(userSignupDetails);
+    console.log(userSignupDetails);
+    signUpHandler(userSignupDetails);
   };
 
   // // Function to handle test login and update state

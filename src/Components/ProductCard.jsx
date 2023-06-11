@@ -33,7 +33,7 @@ const ProductCard = ({ data }) => {
   } = data;
   return (
     <div
-      className="transform duration-200 cursor-pointer rounded-lg hover:shadow-xl"
+      className="transform duration-200 cursor-pointer rounded-lg hover:shadow-2xl border"
       key={_id}
     >
       <NavLink to={`/productDetails/${_id}`}>
@@ -90,7 +90,7 @@ const ProductCard = ({ data }) => {
       </div>
       {!isItemPresentInCartHandler(data) ? (
         <button
-          className="w-full bg-black text-white rounded-lg py-2 text-semibold"
+          className="w-full bg-black text-white rounded-b-lg py-2 text-semibold"
           onClick={() => {
             if (!token) {
               toast.error("Please login to continue");
@@ -104,7 +104,7 @@ const ProductCard = ({ data }) => {
         </button>
       ) : (
         <div
-          className="w-full bg-black text-white rounded-lg py-2 text-semibold text-center"
+          className="w-full bg-green-500 text-white rounded-b-lg py-2 text-semibold text-center"
           onClick={() => {
             if (!token) {
               toast.error("Please login to continue");

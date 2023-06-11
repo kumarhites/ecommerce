@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { RiDeleteBin6Fill } from "react-icons/ri";
+import { AiOutlineDelete } from "react-icons/ai";
 import { RiAddLine } from "react-icons/ri";
 import { CgMathMinus } from "react-icons/cg";
 import { CartContext } from "../contexts/CartContext";
@@ -113,10 +113,10 @@ const CartItems = ({ item }) => {
             </div>
           </div>
           <div
-            className="transition-transform duration-200 active:scale-75 cursor-pointer text-red-400 hover:text-red-500 text-[16px] md:text-[20px] p-3 hover:bg-black/[0.07] rounded-full"
+            className="transition-transform duration-200 active:scale-75 cursor-pointer text-red-500 hover:text-red-600 text-[16px] md:text-[20px] p-3 hover:bg-black/[0.07] rounded-full"
             onClick={() => removeItemFromCart(item)}
           >
-            <RiDeleteBin6Fill />
+            <AiOutlineDelete size={24} />
           </div>
         </div>
       </div>

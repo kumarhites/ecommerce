@@ -70,11 +70,11 @@ export const AuthProvider = ({ children }) => {
     });
 
   const signUpHandler = async ({
+    firstname,
+    lastname,
     email,
     password,
     confirmPassword,
-    firstName,
-    lastName,
   }) => {
     if (password !== confirmPassword) {
       toast.error("Password fields are not matching!");
@@ -82,10 +82,10 @@ export const AuthProvider = ({ children }) => {
     } else {
       try {
         const response = await signUpService(
+          firstname,
+          lastname,
           email,
-          password,
-          firstName,
-          lastName
+          password
         );
 
         const {
@@ -134,6 +134,7 @@ export const AuthProvider = ({ children }) => {
       value={{
         token,
         currentUser,
+        setCurrentUser,
         showPassword,
         toggleLoginPassword,
         loginHandler,

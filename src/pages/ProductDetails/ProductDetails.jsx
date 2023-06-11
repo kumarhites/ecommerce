@@ -1,15 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
 import Wrapper from "../../Components/Wrapper";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import ProductDetailsCarousel from "../../Components/ProductDetailsCarousel";
 import { useParams } from "react-router-dom";
 import { ProductsContext } from "../../contexts/ProductsContext";
 import { CartContext } from "../../contexts/CartContext";
 import { AuthContext } from "../../contexts/AuthContext";
 import { Toaster, toast } from "react-hot-toast";
+import { BsArrowLeftCircle } from "react-icons/bs";
 // import RelatedProducts from "../../Components/RelatedProducts"
 
 const ProductDetails = () => {
+  const navigate = useNavigate();
   const { token } = useContext(AuthContext);
   const { id } = useParams();
   const { products } = useContext(ProductsContext);
@@ -115,7 +117,12 @@ const ProductDetails = () => {
           {/* right column start */}
           <div className="flex-[1] py-3">
             {/* product title */}
-            <div className="text-lg font-semibold -mb-1">{brand}</div>
+            <button onClick={() => navigate(-1)}>
+              <BsArrowLeftCircle size={32} />
+            </button>
+            <div className="text-xl font-bold -mb-1 flex items-center">
+              {brand}
+            </div>
             <div className="text-[34px] font-semibold">{title}</div>
 
             {/* product subtitle */}
@@ -178,7 +185,7 @@ const ProductDetails = () => {
                 Add to Cart
               </button>
             ) : (
-              <div className="inline-flex justify-center w-full py-4 rounded-full bg-black text-white text-lg font-medium duration-200 transition-transform active:scale-90 mb-3 hover:opacity-75">
+              <div className="inline-flex justify-center w-full py-4 rounded-full bg-green-500 text-white text-lg font-medium duration-200 transition-transform active:scale-90 mb-3 hover:opacity-75">
                 <NavLink to="/cart">Go to Cart</NavLink>
               </div>
             )}

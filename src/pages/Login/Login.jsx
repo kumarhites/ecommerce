@@ -5,64 +5,32 @@ import { Toaster } from "react-hot-toast";
 import "./Login.css";
 
 function Login() {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { loginHandler, error, setError, validateEmail, validatePassword } =
-    useContext(AuthContext);
+  const {
+    // showPassword: { login },
+    // toggleLoginPassword,
+    loginHandler,
+  } = useContext(AuthContext);
+
   const [userLoginDetails, setUserLoginDetails] = useState({
     email: "",
     password: "",
   });
 
-  const handleInput = (e) => {
-    setError("");
+  const guestUserDetails = {
+    email: "adarshbalika@gmail.com",
+    password: "adarshbalika",
+  };
+
+  const handleInput = (e) =>
     setUserLoginDetails({
       ...userLoginDetails,
       [e.target.name]: e.target.value,
     });
-  };
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
-    if (userLoginDetails.email === "") {
-      setError("Email is required!");
-      return;
-    }
-
-    if (userLoginDetails.password === "") {
-      setError("Password is required!");
-      return;
-    }
-
-    // if (
-    //   !validateEmail(userLoginDetails.email) ||
-    //   !validatePassword(userLoginDetails.password)
-    // ) {
-    //   setError("Email or password is not valid");
-    //   return;
-    // }
-
-    loginHandler(userLoginDetails, () => {
-      navigate(location?.state?.from?.pathname);
-    });
+    loginHandler(userLoginDetails);
   };
-
-  // Function to handle test login and update state
-  const handleTestLogin = async () => {
-    const testLogin = {
-      email: "adarshbalika@gmail.com",
-      password: "adarshbalika",
-    };
-    setUserLoginDetails(testLogin);
-
-    try {
-      await loginHandler(testLogin); // testlogin
-      navigate(location?.state?.from?.pathname);
-    } catch (error) {
-      console.error("Login error:", error);
-    }
-  };
-
   return (
     <>
       <Toaster
@@ -137,13 +105,13 @@ function Login() {
                 />
               </div>
             </div>
-            {error ? (
+            {/* {error ? (
               <p className="text-center text-sm text-red-600 font-bold p-0 m-0">
                 {error}
               </p>
             ) : (
               ""
-            )}
+            )} */}
 
             <div className="flex gap-3 flex-col">
               <button type="submit" className="loginBtn">
@@ -152,7 +120,7 @@ function Login() {
               <button
                 type="submit"
                 className="loginBtn"
-                onClick={handleTestLogin}
+                onClick={() => setUserLoginDetails(guestUserDetails)}
               >
                 Sign in with Test Credentials
               </button>
