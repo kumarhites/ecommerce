@@ -54,7 +54,7 @@ export const AuthProvider = ({ children }) => {
       } else if (status === 404) {
         toast.error("User not registered!");
       } else {
-        console.error(err);
+        console.error(err.data);
         toast.error("Unable to signin!");
       }
     }
