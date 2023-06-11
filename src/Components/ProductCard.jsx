@@ -15,22 +15,11 @@ const ProductCard = ({ data }) => {
     addToWishList,
     isItemPresentinWishlistHandler,
     removeItemFromWishlist,
-    removeItemFromCart,
     addToCart,
     isItemPresentInCartHandler,
   } = useContext(CartContext);
-  const {
-    _id,
-    title,
-    brand,
-    price,
-    categoryName,
-    trending,
-    rating,
-    size,
-    images,
-    qty,
-  } = data;
+  const { _id, title, brand, price, gender, trending, rating, size, images } =
+    data;
   return (
     <div
       className="transform duration-200 cursor-pointer rounded-lg hover:shadow-2xl border"
@@ -39,9 +28,16 @@ const ProductCard = ({ data }) => {
       <NavLink to={`/productDetails/${_id}`}>
         <img src={images?.[0]?.src} alt={title} className="rounded-lg" />
         <div className="p-4 text-black/[0.9]">
-          <h2 className="text-lg font-medium text-left">{title}</h2>
-          <div className="flex items-center text-black/[0.5]">
-            <p className="mr-2 text-lg font-semibold text-black">₹ {price}</p>
+          <p className="text-lg font-semibold text-black">{brand}</p>
+          <h2 className="text-xl font-medium text-left">{title}</h2>
+          <p>
+            {gender}'s Size: {size}{" "}
+          </p>
+          <div className="flex flex-col text-black/[0.5]">
+            <p className="mr-2 text-lg font-semibold text-black">
+              ₹ {price}{" "}
+              <span className="line-through text-black/[0.5]">₹ 13000</span>
+            </p>
           </div>
         </div>
       </NavLink>
