@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { AiFillStar } from "react-icons/ai";
+import { HiAdjustmentsVertical } from "react-icons/hi2";
 import { FilterContext } from "../contexts/FilterContext";
 
 const Sidebar = ({ categories, brands }) => {
@@ -15,10 +16,17 @@ const Sidebar = ({ categories, brands }) => {
 
   return (
     <>
-      <div className="flex-[0.5] ">
+      <div className="flex-[0.5]">
         <div className="sticky top-[100px]">
           <div className="flex justify-between mb-3">
-            <div className="text-lg font-bold">Filters</div>
+            <div className="text-lg font-bold flex justify-between">
+              <div>
+                <p>Filters</p>{" "}
+              </div>
+              <div className="hidden md:block">
+                <HiAdjustmentsVertical size={24} />
+              </div>
+            </div>
             <div className="text-lg font-bold">
               <button
                 className="justify-center rounded-md bg-black/[0.7] px-2 py-1 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-black/[0.5]"

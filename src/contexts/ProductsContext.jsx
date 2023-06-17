@@ -29,15 +29,6 @@ export const ProductsProvider = ({ children }) => {
     }
   };
 
-  // get single product
-  // const getSingleProduct = async (id) => {
-  //   try {
-  //     const singleProduct = await axios.get(`/api/products/${id}`);
-  //     dispatch({ type: "SET_SINGLE_PRODUCT", payload: singleProduct });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
   useEffect(() => {
     getproducts();
   }, []);

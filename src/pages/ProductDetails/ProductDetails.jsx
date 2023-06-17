@@ -8,6 +8,7 @@ import { CartContext } from "../../contexts/CartContext";
 import { AuthContext } from "../../contexts/AuthContext";
 import { Toaster, toast } from "react-hot-toast";
 import { BsArrowLeftCircle } from "react-icons/bs";
+import RelatedProducts from "../../Components/RelatedProducts";
 // import RelatedProducts from "../../Components/RelatedProducts"
 
 const ProductDetails = () => {
@@ -203,8 +204,8 @@ const ProductDetails = () => {
             )}
           </div>
           {/* right column ends */}
-          {/* <RelatedProducts /> */}
         </div>
+        <RelatedProducts product={product} products={products} />
       </Wrapper>
     </div>
   );

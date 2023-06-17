@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import Wrapper from "./Wrapper";
 import { IoBagOutline, IoMenu } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
-import { RiSearchLine, RiHeart3Line } from "react-icons/ri";
+import { RiHeart3Line } from "react-icons/ri";
 import { CgSmileMouthOpen } from "react-icons/cg";
 import { AuthContext } from "../contexts/AuthContext";
 
@@ -60,8 +60,8 @@ const Navigation = () => {
           )}
           {/* icons menu start */}
           <div className="flex items-center gap-0 md:gap-5 text-black">
-            <div className="hover:bg-black/[0.07] p-2 rounded-full">
-              <NavLink to="/products">{<RiSearchLine size={24} />}</NavLink>
+            <div className="hover:bg-black/[0.07] p-2 rounded-full text-base font-semibold">
+              <NavLink to="/products">Explore</NavLink>
             </div>
             {token ? (
               <div className="relative inline-block  hover:bg-black/[0.07] p-2 rounded-full">

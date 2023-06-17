@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoHeart } from "react-icons/io5";
@@ -9,6 +9,9 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({ data }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const navigate = useNavigate();
   const { token } = useContext(AuthContext);
   const {
@@ -22,13 +25,19 @@ const ProductCard = ({ data }) => {
     data;
   return (
     <div
-      className="transform duration-200 cursor-pointer rounded-lg hover:shadow-2xl border"
+      className="transform duration-200 cursor-pointer rounded-lg hover:shadow-2xl border "
       key={_id}
     >
       <NavLink to={`/productDetails/${_id}`}>
-        <img src={images?.[0]?.src} alt={title} className="rounded-lg" />
+        <img
+          src={images?.[0]?.src}
+          alt={title}
+          className={`rounded-lg ${
+            brand === "Nike"
+          } ? "h-96 aspect-square object-fill" : ""`}
+        />
         <div className="p-4 text-black/[0.9]">
-          <p className="text-lg font-semibold text-black">{brand}</p>
+          <p className="text-sm font-semibold text-black">{brand}</p>
           <h2 className="text-xl font-medium text-left">{title}</h2>
           <p>
             {gender}'s Size: {size}{" "}

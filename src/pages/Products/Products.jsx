@@ -6,10 +6,7 @@ import { FilterContext } from "../../contexts/FilterContext";
 import { Toaster } from "react-hot-toast";
 
 const Products = () => {
-  // const { products } = useContext(ProductsContext);
-  // console.log("products", products);
   const { ratingFilter, searchInput, dispatch } = useContext(FilterContext);
-  // console.log("filterProducts from products page: ", filterProducts);
   const categories = [
     { id: 1, category: "Lifestyle" },
     { id: 2, category: "Running" },
@@ -23,10 +20,6 @@ const Products = () => {
     { id: 4, brandName: "Reebok" },
     { id: 5, brandName: "Jordan" },
   ];
-  // const [rangeValue, setRangeValue] = useState(1);
-  // const handleRangeInput = (e) => {
-  //   setRangeValue(e.target.value);
-  // };
 
   return (
     <>
