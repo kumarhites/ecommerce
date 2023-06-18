@@ -35,7 +35,6 @@ export default function Signup() {
 
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
-    console.log(userSignupDetails);
     signUpHandler(userSignupDetails);
   };
 
