@@ -44,13 +44,13 @@ To run the app locally, follow these steps:
 1. Clone the repository:
 
    ```shell
-   [git clone https://github.com/your-username/sneakers-ecommerce-app.git](https://github.com/kumarhites/ecommerce.git)
+   https://github.com/kumarhites/ecommerce.git
    ```
 
 2. Navigate to the project directory:
 
    ```shell
-   cd sneakers-ecommerce-app
+   cd ecommerce
    ```
 
 3. Install the dependencies:
@@ -79,6 +79,3 @@ The app relies on the following dependencies:
 
 Contributions are welcome! If you find any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).
