@@ -44,7 +44,7 @@ To run the app locally, follow these steps:
 1. Clone the repository:
 
    ```shell
-   git clone https://github.com/your-username/sneakers-ecommerce-app.git
+   [git clone https://github.com/your-username/sneakers-ecommerce-app.git](https://github.com/kumarhites/ecommerce.git)
    ```
 
 2. Navigate to the project directory:
