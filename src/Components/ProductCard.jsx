@@ -38,7 +38,7 @@ const ProductCard = ({ data }) => {
         />
         <div className="p-4 text-black/[0.9]">
           <p className="text-sm font-semibold text-black">{brand}</p>
-          <h2 className="text-xl font-medium text-left">{title}</h2>
+          <h2 className="text-xl font-medium">{title}</h2>
           <p>
             {gender}'s Size: {size}{" "}
           </p>
