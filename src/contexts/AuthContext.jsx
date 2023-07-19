@@ -101,7 +101,7 @@ export const AuthProvider = ({ children }) => {
             })
           );
           setToken(encodedToken);
-          toast.success("Successfully signed up! Kindly login to continue!");
+          toast.success("Successfully signed up! Login to continue!");
           navigate("/login");
         }
       } catch (err) {

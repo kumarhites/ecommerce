@@ -1,27 +1,28 @@
-import { createContext, useContext, useReducer, useState } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import { cartReducer } from "../reducers/cartReducer";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { AuthContext } from "./AuthContext";
+import { getCartService } from "../services/Cart/getCartService";
 // import { AuthContext } from "./AuthContext";
 
 export const CartContext = createContext();
-
 const initialState = {
   cart: [],
   wishlist: [],
 };
 
 export const CartProvider = ({ children }) => {
-  const { token } = useContext(AuthContext);
-  const [state, dispatch] = useReducer(cartReducer, initialState);
+  const { token, currentUser, setCurrentUser } = useContext(AuthContext);
+  const [state, dispatch] = useReducer(cartReducer, {
+    cart: currentUser?.cart || initialState.cart,
+    wishlist: initialState.wishlist,
+  });
 
   //get cart items
   const getCartItems = async () => {
     try {
-      const response = await axios.get("/api/user/cart", {
-        headers: { authorization: token },
-      });
+      const response = await getCartService(token);
       if (response.status === 200) {
         const cartItems = response.data.cart;
         dispatch({ type: "SET_CART", payload: cartItems });
@@ -189,10 +190,31 @@ export const CartProvider = ({ children }) => {
     return state.wishlist.find(({ _id }) => product._id === _id);
   };
 
-  useState(() => {
-    getCartItems();
-    getWishListItems();
-  }, []);
+  const resetCartState = () => {
+    dispatch({ type: "SET_CART", payload: initialState.cart });
+    dispatch({ type: "SET_WISHLIST", payload: initialState.wishlist });
+  };
+
+  useEffect(() => {
+    if (!currentUser) {
+      resetCartState();
+    }
+  }, [currentUser]);
+
+  useEffect(() => {
+    token && getCartItems();
+    token && getWishListItems();
+  }, [token]);
+
+  // Update currentUser when cart changes, but only when cart changes
+  useEffect(() => {
+    if (currentUser && state.cart !== currentUser.cart) {
+      setCurrentUser((prevUser) => ({
+        ...prevUser,
+        cart: state.cart,
+      }));
+    }
+  }, [state.cart, setCurrentUser, currentUser]);
 
   return (
     <CartContext.Provider
@@ -201,8 +223,8 @@ export const CartProvider = ({ children }) => {
         addToWishList,
         isItemPresentInCartHandler,
         isItemPresentinWishlistHandler,
-        cart: state.cart,
-        wishlist: state.wishlist,
+        cart: state?.cart,
+        wishlist: state?.wishlist,
         cartCountHandler,
         removeItemFromCart,
         removeItemFromWishlist,

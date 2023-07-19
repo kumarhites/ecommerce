@@ -32,7 +32,6 @@ export const getCartItemsHandler = function (schema, request) {
  * body contains {product}
  * */
 
-// cart controller
 export const addItemToCartHandler = function (schema, request) {
   const userId = requiresAuth.call(this, request);
   try {
@@ -41,39 +40,26 @@ export const addItemToCartHandler = function (schema, request) {
         404,
         {},
         {
-          errors: ["The email you entered is not registered. Not Found error"],
+          errors: ["The email you entered is not Registered. Not Found error"],
         }
       );
     }
-
-    const user = schema.users.findBy({ _id: userId });
-    if (!user) {
-      return new Response(
-        404,
-        {},
-        {
-          errors: ["User not found"],
-        }
-      );
-    }
-
+    const userCart = schema.users.findBy({ _id: userId }).cart;
     const { product } = JSON.parse(request.requestBody);
-    const cartItem = {
+    userCart.push({
       ...product,
       createdAt: formatDate(),
       updatedAt: formatDate(),
       qty: 1,
-    };
-
-    user.cart.push(cartItem);
-    this.db.users.update({ _id: userId }, { cart: user.cart });
-    return new Response(201, {}, { cart: user.cart });
+    });
+    this.db.users.update({ _id: userId }, { cart: userCart });
+    return new Response(201, {}, { cart: userCart });
   } catch (error) {
     return new Response(
       500,
       {},
       {
-        error: error.message,
+        error,
       }
     );
   }

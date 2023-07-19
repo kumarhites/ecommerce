@@ -18,8 +18,8 @@ const Navigation = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
   const { cart, wishlist } = useContext(CartContext);
   const { token } = useContext(AuthContext);
-  const cartLength = cart.length;
-  const wishlistLength = wishlist.length;
+  const cartLength = cart?.length;
+  const wishlistLength = wishlist?.length;
 
   useEffect(() => {
     const controlNavbar = () => {
