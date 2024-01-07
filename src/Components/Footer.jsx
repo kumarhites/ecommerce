@@ -21,17 +21,17 @@ const Footer = () => {
           <p>Let's Connect</p>
           <ul className="flex gap-3 mt-3">
             <li>
-              <NavLink to="/github">
+              <NavLink to="https://github.com/kumarhites/">
                 <ImGithub size={24} />
               </NavLink>
             </li>
             <li>
-              <NavLink to="/github">
+              <NavLink to="https://twitter.com/hitesh091895">
                 <BsTwitter size={24} />
               </NavLink>
             </li>
             <li>
-              <NavLink to="/github">
+              <NavLink to="https://www.linkedin.com/in/hitesh-kumar09">
                 <BsLinkedin size={24} />
               </NavLink>
             </li>
